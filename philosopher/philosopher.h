@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 10:19:55 by yson              #+#    #+#             */
-/*   Updated: 2022/03/08 22:14:06 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/09 23:41:58 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_info
 	int 			time_to_eat;
 	int				time_to_sleep;
 	int				num_of_philo_must_eat;
-	long			time;
+	long long		time_start;
 	pthread_mutex_t	*forks_mutex;
 	pthread_mutex_t print_mutex;
 	

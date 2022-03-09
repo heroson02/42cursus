@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 10:19:29 by yson              #+#    #+#             */
-/*   Updated: 2022/03/08 23:30:45 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/10 00:43:18 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,17 @@ int	init_fork(t_info *info)
 	info->philos = malloc((info->num_of_philo + 1) * sizeof(t_philo));
 	pthread_mutex_init(&info->print_mutex, NULL);
 	if (!info->forks_mutex || !info->philos)
-		return (0)
+		return (0);
 	
 }
 
 void	print_mutex(t_philo philo, char *str)
 {
+	long long ms;
+
+	ms = get_time_ms();
 	pthread_mutex_lock(&philo.info->print_mutex);
-	printf("%s\n", str);
+	printf("%lldms %d %s\n", ms - philo.info->time_start, philo.name ,str);
 	pthread_mutex_unlock(&philo.info->print_mutex);
 }
 
@@ -51,7 +54,7 @@ void	ft_philosopher(t_info *info)
 	
 }
 
-unsigned long long	get_time_ms(void)
+long long	get_time_ms(void)
 {
 	struct timeval tv;
 
@@ -64,5 +67,6 @@ int main(int argc, char **argv)
 	t_info info;
 
 	init_info(argc, argv, &info);
-	init_fork(info);
+	init_fork(&info);
+	info.time_start = get_time_ms();
 }
