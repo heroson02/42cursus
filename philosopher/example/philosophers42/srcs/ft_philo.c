@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_philo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:45:10 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/08/03 15:28:10 by gpaeng           ###   ########.fr       */
+/*   Updated: 2022/03/16 19:43:02 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ int	ft_philo_do(t_game *game, t_philo *philo)
 	ft_printf(game, "has taken a fork", philo->id);
 	pthread_mutex_lock(&(game->forks[philo->right_fork]));
 	ft_printf(game, "has taken a fork", philo->id);
+	
 	ft_philo_eat(philo->game, philo);
+	
 	pthread_mutex_unlock(&(game->forks[philo->left_fork]));
 	pthread_mutex_unlock(&(game->forks[philo->right_fork]));
 	if (game->eat_check)

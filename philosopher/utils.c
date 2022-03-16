@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/01 12:20:43 by gpaeng            #+#    #+#             */
-/*   Updated: 2022/03/16 12:40:31 by yson             ###   ########.fr       */
+/*   Created: 2022/03/16 12:04:37 by yson              #+#    #+#             */
+/*   Updated: 2022/03/16 19:32:25 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "philosopher.h"
 
-int	main(int argc, char *argv[])
+long long	get_time_ms(void)
 {
-	t_game	game;
+	struct timeval tv;
 
-	if (argc != 5 && argc != 6)
-		return (ft_error("[Error] check argc"));
-	if (ft_philo_input(&game, argv, argc))
-		return (ft_error("[Error] check philo input"));
-	if (ft_philo_start(&game, (&game)->philo))
-		return (ft_error("[Error] check philo start"));
-	return (0);
+	gettimeofday(&tv, NULL);
+	return (tv.tv_usec / 1000 + tv.tv_sec * 1000);
+}
+
+void	print_mutex(t_philo philo, char *str)
+{
+	pthread_mutex_lock(&philo.info->print_mutex);
+	if (!philo.info->die)
+		printf("%lld %d %s\n", get_time_ms() - philo.info->time_start, philo.name + 1,str);
+	pthread_mutex_unlock(&philo.info->print_mutex);
 }
