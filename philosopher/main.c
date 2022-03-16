@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 10:19:29 by yson              #+#    #+#             */
-/*   Updated: 2022/03/16 19:43:15 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/16 20:47:02 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	eating(t_info *info)
 		current_time = get_time_ms();
 		if (current_time - start_eat_time >= time_to_eat)
 			break ;
-		usleep(100);
+		usleep(10);
 	}
 }
 
@@ -123,7 +123,7 @@ void	sleeping(t_philo *philo)
 		current_time = get_time_ms();
 		if (current_time - start_sleep_time >= time_to_sleep)
 			break ;
-		usleep(100);
+		usleep(10);
 	}
 }
 
@@ -144,6 +144,8 @@ int	philo_do(t_philo *philo)
 	eat(philo);
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
+	if (philo->info->eat_check)
+		return (-1);
 	return (0);
 }
 
@@ -167,6 +169,58 @@ void	*ft_philo(void *philo)
 	return (0);
 }
 
+void	philo_end(t_info *info, t_philo *philos)
+{
+	int i;
+
+	i = 0;
+	while (i < info->num_of_philo)
+		pthread_join(philos[i++].thread_id, NULL);
+	i = 0;
+	while (i < info->num_of_philo)
+		pthread_mutex_destroy(&info->forks_mutex[i++]);
+	pthread_mutex_destroy(&info->print_mutex);
+	free(info->philos);
+	free(info->forks_mutex);
+}
+
+void	ft_eat_check(t_info *info, t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	while (info->num_of_philo_must_eat != 0 && i < info->num_of_philo
+		&& philo[i].eat_count > info->num_of_philo_must_eat)
+		i++;
+	if (i == info->num_of_philo)
+		info->eat_check = 1;
+}
+
+void	philo_death_check(t_info *info, t_philo *philo)
+{
+	int i;
+
+
+	while (!(info->eat_check))
+	{
+		i = 0;
+		while ((i < info->num_of_philo) && (!(info->die)))
+		{
+			// pthread_mutex_lock(&(game->eating));
+			if ((get_time_ms() - philo[i].last_eat_time) > info->time_to_die)
+			{
+				print_mutex(*philo, "died");
+				info->die = 1;
+			}
+			// pthread_mutex_unlock(&(game->eating));
+			i++;
+		}
+		if (info->die)
+			break ;
+		ft_eat_check(info, info->philos);
+	}
+}
+
 int	start_philo(t_info *info, t_philo *philos)
 {
 	int		i;
@@ -183,7 +237,7 @@ int	start_philo(t_info *info, t_philo *philos)
 		i++;
 	}
 	// ft_death_check(game, game->philo);
-	// ft_end_philo(game, game->philo);
+	philo_end(info, philos);
 	return (1);
 }
 

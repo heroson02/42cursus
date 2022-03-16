@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 10:19:55 by yson              #+#    #+#             */
-/*   Updated: 2022/03/16 19:30:35 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/16 20:41:54 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_info
 	long long		time_start;
 	pthread_mutex_t	*forks_mutex;
 	pthread_mutex_t print_mutex;
-	
+	int				eat_check;
 	struct s_philo	*philos;
 }	t_info;
 
