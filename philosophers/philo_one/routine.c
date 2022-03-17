@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:07:23 by yson              #+#    #+#             */
-/*   Updated: 2022/03/17 14:38:34 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/17 16:54:34 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,16 @@ void	sleeping(t_info *info)
 
 void	eat(t_philo *philo)
 {
+	pthread_mutex_lock(&(philo->info->finish_mutex));
 	pthread_mutex_lock(&(philo->info->eating_mutex));
 	philo->last_eat_time = get_time_ms();
 	print_mutex(*philo, "is eating");
-	pthread_mutex_unlock(&(philo->info->eating_mutex));
 	philo->eat_count++;
+	pthread_mutex_unlock(&(philo->info->eating_mutex));
 	eating(philo->info);
+	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(&(philo->info->finish_mutex));
 }
 
 int	philo_do(t_philo *philo)
@@ -63,8 +67,7 @@ int	philo_do(t_philo *philo)
 	pthread_mutex_lock(philo->right_fork);
 	print_mutex(*philo, "has taken a fork");
 	eat(philo);
-	pthread_mutex_unlock(philo->right_fork);
-	pthread_mutex_unlock(philo->left_fork);
+
 	if (philo->info->eat_check)
 		return (-1);
 	return (0);
@@ -78,7 +81,7 @@ void	*ft_philo(void *philo)
 	philo_copy = (t_philo *)philo;
 	info = philo_copy->info;
 	if (philo_copy->name % 2)
-		usleep(10000);
+		usleep(1000 * info->time_to_eat);
 	while (!info->die)
 	{
 		if (philo_do(philo_copy))
