@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:42:29 by yson              #+#    #+#             */
-/*   Updated: 2022/03/18 22:10:38 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/18 22:28:57 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_info
 	int				num_of_must_eat;
 	pthread_mutex_t *forks;
 	pthread_mutex_t finish_mutex;
+	pthread_mutex_t print_mutex;
 	struct timeval	start_time;
 	t_philo			*philos;
 }	t_info;
@@ -58,4 +59,6 @@ void	*monitor(void *argv);
 
 long long	time_to_ms(struct timeval now);
 void	print_philo_msg(t_philo *philo, char *str);
+void    print_mutex(t_philo *philo, char *str);
+long long   get_time_ms();
 #endif

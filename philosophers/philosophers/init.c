@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:44:42 by yson              #+#    #+#             */
-/*   Updated: 2022/03/18 19:28:32 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/18 22:31:46 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	init_philos(t_info *info)
 		return (0);
 	if (pthread_mutex_init(&info->finish_mutex, NULL))
 		return (0);
+	if (pthread_mutex_init(&info->print_mutex, NULL))
+		return (0);
 	while (i < info->num_of_philo)
 	{
 		info->philos[i].name = i;
@@ -77,11 +79,6 @@ int	init_philos(t_info *info)
 			return (0);
 		if (pthread_mutex_init(&info->forks[i], NULL))
 			return (0);
-		// if (i == 0)
-		// 	info->philos[i].left = &info->forks[info->num_of_philo - 1];
-		// else
-		// 	info->philos[i].left = &info->forks[i - 1];
-		// info->philos[i].right = &info->forks[i];
 		info->philos[i].left = &info->forks[i];
 		if (i + 1 == info->num_of_philo)
 			info->philos[i].right = &info->forks[0];
