@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 15:51:22 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/06/20 23:58:04 by jaeskim          ###   ########.fr       */
+/*   Updated: 2022/03/18 18:05:22 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,21 @@ static void	eating(t_philo *philo)
 {
 	long long	ms;
 
-	pthread_mutex_lock(&philo->check_mutex);
+	pthread_mutex_lock(&philo->check_mutex);		//check_mutex
 	gettimeofday(&philo->last_time_to_eat, NULL);
 	ms = time_to_ms(philo->last_time_to_eat) - \
 		time_to_ms(philo->info->create_at);
-	pthread_mutex_lock(&philo->info->finish_mutex);
+	pthread_mutex_lock(&philo->info->finish_mutex);		//finish mutex
 	if (!philo->info->finish)
 		printf("%lld\t%d\t %s\n", ms, philo->n + 1, "is eating");
 	philo->num_of_eat += 1;
 	if (philo->num_of_eat == philo->info->num_of_must_eat)
 		philo->info->num_of_eat_finish_philo += 1;
-	pthread_mutex_unlock(&philo->info->finish_mutex);
+	pthread_mutex_unlock(&philo->info->finish_mutex);		//finish mutex
 	usleep(philo->info->time_to_eat * 1000);
 	pthread_mutex_unlock(philo->right);
 	pthread_mutex_unlock(philo->left);
-	pthread_mutex_unlock(&philo->check_mutex);
+	pthread_mutex_unlock(&philo->check_mutex);				//check_mutex
 }
 
 static void	sleeping(t_philo *philo)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 21:41:53 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/06/20 23:55:03 by jaeskim          ###   ########.fr       */
+/*   Updated: 2022/03/18 16:25:26 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ int			ft_puterror(char *str);
 int			ft_malloc(void *dst, size_t size);
 long long	time_to_ms(struct timeval now);
 void		print_philo_msg(t_philo *philo, char *str);
+
 
 #endif

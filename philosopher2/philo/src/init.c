@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:43:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/06/20 23:48:05 by jaeskim          ###   ########.fr       */
+/*   Updated: 2022/03/18 19:28:16 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,71 @@ static int	check_info(t_info *info, int argc)
 	return (FT_SUCCESS);
 }
 
+int malloc_arr(t_info *info)
+{
+	if (ft_malloc(&info->philos, sizeof(t_philo) * info->num_of_philo) || \
+		ft_malloc(&info->forks, sizeof(pthread_mutex_t) * info->num_of_philo))
+		return (ft_puterror("ERROR: malloc failed\n"));
+	return (FT_SUCCESS);
+}
+
+// int	init_philos(t_info *info)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	if (malloc_arr(info))
+// 		return (FT_ERROR);
+// 	if (pthread_mutex_init(&info->finish_mutex, NULL))
+// 		return (FT_ERROR);
+// 	while (i < info->num_of_philo)
+// 	{
+// 		info->philos->n = i;
+// 		info->philos->info = info;
+// 		if (pthread_mutex_init(&info->philos[i].check_mutex, NULL))
+// 			return (FT_ERROR);
+// 		if (pthread_mutex_init(&info->forks[i], NULL))
+// 			return (FT_ERROR);
+// 		// if (i == 0)
+// 		// 	info->philos[i].left = &info->forks[info->num_of_philo - 1];
+// 		// else
+// 		// 	info->philos[i].left = &info->forks[i - 1];
+// 		// info->philos[i].right = &info->forks[i];
+// 		info->philos[i].left = &info->forks[i];
+// 		if (i + 1 == info->num_of_philo)
+// 			info->philos[i].right = &info->forks[0];
+// 		else
+// 			info->philos[i].right = &info->forks[i + 1];
+// 		i++;
+// 	}
+// 	return (FT_SUCCESS);
+// }
+
 static int	init_philos(t_info *info)
 {
 	int		i;
 
 	pthread_mutex_init(&info->finish_mutex, NULL);
-	if (ft_malloc(&info->philos, sizeof(t_philo) * info->num_of_philo) || \
-		ft_malloc(&info->forks, sizeof(pthread_mutex_t) * info->num_of_philo))
-		return (ft_puterror("ERROR: malloc failed\n"));
+	// if (ft_malloc(&info->philos, sizeof(t_philo) * info->num_of_philo) || \
+	// 	ft_malloc(&info->forks, sizeof(pthread_mutex_t) * info->num_of_philo))
+	// 	return (ft_puterror("ERROR: malloc failed\n"));
+	malloc_arr(info);
 	i = 0;
 	while (i < info->num_of_philo)
 	{
 		info->philos[i].n = i;
 		pthread_mutex_init(&info->forks[i], NULL);
 		pthread_mutex_init(&info->philos[i].check_mutex, NULL);
-		if (i == 0)
-			info->philos[i].left = &info->forks[info->num_of_philo - 1];
+		// if (i == 0)
+		// 	info->philos[i].left = &info->forks[info->num_of_philo - 1];
+		// else
+		// 	info->philos[i].left = &info->forks[i - 1];
+		// info->philos[i].right = &info->forks[i];
+		info->philos[i].left = &info->forks[i];
+		if (i + 1 == info->num_of_philo)
+			info->philos[i].right = &info->forks[0];
 		else
-			info->philos[i].left = &info->forks[i - 1];
-		info->philos[i].right = &info->forks[i];
+			info->philos[i].right = &info->forks[i + 1];
 		info->philos[i].info = info;
 		++i;
 	}

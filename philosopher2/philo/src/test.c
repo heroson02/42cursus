@@ -1,18 +1,82 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/18 16:44:42 by yson              #+#    #+#             */
-/*   Updated: 2022/03/18 19:28:32 by yson             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "philo.h"
 
-#include "philosopher.h"
+static int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
 
-int	arg_range_check(t_info *info, int argc)
+void	check(t_info *info)
+{
+	int i;
+
+	i = 0;
+	while (i < info->num_of_philo)
+	{
+		pthread_mutex_init(&info->forks[i], NULL);
+		pthread_mutex_init(&info->philos[i].check_mutex, NULL);
+		i++;
+	}
+	
+}
+
+static int	is_contain(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+static unsigned long long	ft_atois(char *str)
+{
+	int					i;
+	int					minus;
+	unsigned long long	result;
+	unsigned long long	base_len;
+
+	result = 0;
+	minus = 1;
+	i = 0;
+	base_len = 10;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
+		i++;
+	while (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			minus *= -1;
+		i++;
+	}
+	while (str[i] != '\0')
+	{
+		if (!ft_isdigit(str[i]))
+			exit(0);
+		if (is_contain("0123456789", str[i]) != -1)
+			result = result * base_len + (is_contain("0123456789", str[i++]));
+	}
+	return (result * minus);
+}
+
+int	ft_atoi_ad(char *str)
+{
+	long long	num;
+
+	num = ft_atois(str);
+	if (num > 2147483647 || num < -2147483648)
+		exit(0);
+	return ((int)num);
+}
+
+// ///////////////////////////////////////////////////////
+
+int	arg_range_check(t_info *info, int argc)	//문제 x
 {
 	if (info->num_of_must_eat < 1 && argc == 6)
 		return (0);
@@ -22,7 +86,7 @@ int	arg_range_check(t_info *info, int argc)
 	return (1);
 }
 
-int	handle_arg(int argc, char **argv, t_info *info)
+int	handle_arg(int argc, char **argv, t_info *info)	//문제 x
 {
 	memset(info, 0, sizeof(t_info));
 	info->num_of_philo = ft_atoi_ad(argv[1]);
@@ -36,25 +100,17 @@ int	handle_arg(int argc, char **argv, t_info *info)
 	return (1);
 }
 
-int	ft_malloc(void *dst, size_t size)
-{
-	*(void **)dst = malloc(size);
-	if (*(void **)dst == NULL)
-		return (0);
-	memset(*(void **)dst, 0, size);
-	return (1);
-}
-
 int malloc_arr(t_info *info)
 {
 	// info->philos = malloc(sizeof(t_philo) * info->num_of_philo);
 	// if (!info->philos)
 	// 	return (0);
-	// memset(&info->philos, 0, sizeof(t_philo) * info->num_of_philo);
+	// memset(info->philos, 0, sizeof(t_philo) * info->num_of_philo);
 	// info->forks = malloc(sizeof(pthread_mutex_t) * info->num_of_philo);
 	// if (!info->forks)
 	// 	return (0);
-	// memset(&info->forks, 0, sizeof(pthread_mutex_t) * info->num_of_philo);
+	// memset(info->forks, 0, sizeof(pthread_mutex_t) * info->num_of_philo);
+	// return (1);
 	ft_malloc(&info->philos, sizeof(t_philo) * info->num_of_philo);
 	ft_malloc(&info->forks ,sizeof(pthread_mutex_t) * info->num_of_philo);
 	return (1);
@@ -71,9 +127,9 @@ int	init_philos(t_info *info)
 		return (0);
 	while (i < info->num_of_philo)
 	{
-		info->philos[i].name = i;
+		info->philos[i].n = i;
 		info->philos[i].info = info;
-		if (pthread_mutex_init(&info->philos[i].check, NULL))
+		if (pthread_mutex_init(&info->philos[i].check_mutex, NULL))
 			return (0);
 		if (pthread_mutex_init(&info->forks[i], NULL))
 			return (0);
@@ -92,13 +148,13 @@ int	init_philos(t_info *info)
 	return (1);
 }
 
-int init(int argc, char **argv, t_info *info)
+int	init(t_info *info, int argc, char *argv[])
 {
 	if (argc != 5 && argc != 6)
-		return (0);
+		return (FT_ERROR);
 	if (!handle_arg(argc, argv, info))
-		return (0);
+		return (FT_ERROR);
 	if (!init_philos(info))
-		return (0);
-	return (1);
+		return (FT_ERROR);
+	return (FT_SUCCESS);
 }
