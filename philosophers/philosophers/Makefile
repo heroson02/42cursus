@@ -1,7 +1,9 @@
 SRCS =	main.c \
 		ft_atoi_ad.c \
 		init.c \
-		philo.c
+		philo.c	\
+		check.c	\
+		routine.c
 CC = gcc
 CFLAGS= -Wextra -Werror -Wall
 HEADER = includes

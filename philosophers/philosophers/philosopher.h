@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:42:29 by yson              #+#    #+#             */
-/*   Updated: 2022/03/18 18:24:34 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/18 22:10:38 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,10 @@ int init(int argc, char **argv, t_info *info);
 
 void	create_philos(t_info *info);
 void	join_and_free_philos(t_info *info);
+void	*philo(void *argv);
+void	*monitor_each_must_eat(void *argv);
+void	*monitor(void *argv);
+
+long long	time_to_ms(struct timeval now);
+void	print_philo_msg(t_philo *philo, char *str);
 #endif
