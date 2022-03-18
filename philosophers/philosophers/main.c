@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:25:54 by yson              #+#    #+#             */
-/*   Updated: 2022/03/18 16:44:56 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/18 17:26:04 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,7 @@ int main(int argc, char **argv)
 {
 	t_info info;
 
-	init(argc, argv, &info);
+	if (!init(argc, argv, &info))
+		return (0);
+	
 }

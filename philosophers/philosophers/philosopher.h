@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:42:29 by yson              #+#    #+#             */
-/*   Updated: 2022/03/18 17:14:56 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/18 17:25:33 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ typedef struct s_info
 }	t_info;
 
 int	ft_atoi_ad(char *str);
+int init(int argc, char **argv, t_info *info);
 
 #endif
