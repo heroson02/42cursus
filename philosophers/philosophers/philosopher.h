@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:42:29 by yson              #+#    #+#             */
-/*   Updated: 2022/03/18 17:25:33 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/18 18:24:34 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ typedef struct s_philo
 	pthread_t		thread;
 	struct s_info	*info;
 	pthread_mutex_t check;
-	long long		last_time_to_eat;
+	struct timeval		last_time_to_eat;
 }	t_philo;
 
 typedef struct s_info
 {
+	int				finish;
 	int				num_of_philo;
 	int				eat_amount_goal;
 	int				time_to_die;
@@ -41,11 +42,14 @@ typedef struct s_info
 	int				num_of_must_eat;
 	pthread_mutex_t *forks;
 	pthread_mutex_t finish_mutex;
-	long long		start_time;
+	struct timeval	start_time;
 	t_philo			*philos;
 }	t_info;
 
 int	ft_atoi_ad(char *str);
 int init(int argc, char **argv, t_info *info);
 
+
+void	create_philos(t_info *info);
+void	join_and_free_philos(t_info *info);
 #endif

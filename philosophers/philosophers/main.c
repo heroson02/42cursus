@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:25:54 by yson              #+#    #+#             */
-/*   Updated: 2022/03/18 17:26:04 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/18 18:10:41 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@ int main(int argc, char **argv)
 
 	if (!init(argc, argv, &info))
 		return (0);
-	
+	create_philos(&info);
+	join_and_free_philos(&info);
 }

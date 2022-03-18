@@ -1,10 +1,7 @@
 SRCS =	main.c \
-		ft_atoi.c \
-		error.c	\
-		utils.c	\
-		check.c	\
-		routine.c \
-		init.c
+		ft_atoi_ad.c \
+		init.c \
+		philo.c
 CC = gcc
 CFLAGS= -Wextra -Werror -Wall
 HEADER = includes
@@ -12,10 +9,10 @@ OBJ = $(SRCS:.c=.o)
 NAME = philo
 
 $(NAME) :  $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	$(CC) $(CFLAGS) -g -o $(NAME) $(OBJ)
 
 %o : %c
-	$(CC) $(CFLAGS) -c $< -I$(HEADER)
+	$(CC) $(CFLAGS) -g -c $< -I$(HEADER)
 
 all : $(NAME)
 
