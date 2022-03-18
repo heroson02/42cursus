@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 18:06:14 by yson              #+#    #+#             */
-/*   Updated: 2022/03/18 23:40:41 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/18 23:43:50 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void    print_mutex(t_philo *philo, char *str)
     if (!philo->info->finish)
     {
 		printf("%lld\t", get_time_ms() - philo->info->start_time);
-		printf("%d\t", philo->name);
+		printf("%d\t", philo->name + 1);
 		printf("%s\n", str);
 	}
     pthread_mutex_unlock(&philo->info->print_mutex);
@@ -66,7 +66,7 @@ void	create_philos(t_info *info)
 	}
 	if (info->num_of_must_eat != 0)
 	{
-		pthread_create(&thread, NULL, monitor_each_must_eat, info);
+		pthread_create(&thread, NULL, check_goal, info);
 		pthread_detach(thread);
 	}
 }

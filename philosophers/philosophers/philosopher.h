@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:42:29 by yson              #+#    #+#             */
-/*   Updated: 2022/03/18 23:40:40 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/18 23:44:32 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,11 @@ typedef struct s_info
 int	ft_atoi_ad(char *str);
 int init(int argc, char **argv, t_info *info);
 
-
 void	create_philos(t_info *info);
 void	join_and_free_philos(t_info *info);
-void	*philo(void *argv);
-void	*monitor_each_must_eat(void *argv);
-void	*monitor(void *argv);
+void	*philo(void *data);
+void	*check_goal(void *data);
+void	*monitor(void *data);
 
 void	print_philo_msg(t_philo *philo, char *str);
 void    print_mutex(t_philo *philo, char *str);

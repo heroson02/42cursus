@@ -6,17 +6,17 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 22:06:39 by yson              #+#    #+#             */
-/*   Updated: 2022/03/18 23:37:18 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/18 23:43:03 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	*monitor_each_must_eat(void *argv)
+void	*check_goal(void *data)
 {
 	t_info	*info;
 
-	info = argv;
+	info = data;
 	while (!info->finish)
 	{
 		pthread_mutex_lock(&info->finish_mutex);
@@ -27,12 +27,12 @@ void	*monitor_each_must_eat(void *argv)
 	return (NULL);
 }
 
-void	*monitor(void *argv)
+void	*monitor(void *data)
 {
 	t_philo			*philo;
 	long long		ms;
 
-	philo = argv;
+	philo = data;
 	while (!philo->info->finish)
 	{
 		pthread_mutex_lock(&philo->check);
