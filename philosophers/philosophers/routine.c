@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 22:07:55 by yson              #+#    #+#             */
-/*   Updated: 2022/03/18 22:31:52 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/18 23:36:10 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	pickup_fork(t_philo *philo)
 static void	eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->check);		//check
-	gettimeofday(&philo->last_time_to_eat, NULL);
+	philo->last_time_to_eat = get_time_ms();
 	pthread_mutex_lock(&philo->info->finish_mutex);		//finish mutex
 	if (!philo->info->finish)
 		print_mutex(philo, "is eating");

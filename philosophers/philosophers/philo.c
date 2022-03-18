@@ -6,20 +6,11 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 18:06:14 by yson              #+#    #+#             */
-/*   Updated: 2022/03/18 22:29:12 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/18 23:40:41 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
-
-long long	time_to_ms(struct timeval now)
-{
-	long long		ms;
-
-	ms = now.tv_sec * 1000;
-	ms += now.tv_usec / 1000;
-	return (ms);
-}
 
 long long   get_time_ms()
 {
@@ -34,7 +25,7 @@ void    print_mutex(t_philo *philo, char *str)
     pthread_mutex_lock(&philo->info->print_mutex);
     if (!philo->info->finish)
     {
-		printf("%lld\t", get_time_ms() - time_to_ms(philo->info->start_time));
+		printf("%lld\t", get_time_ms() - philo->info->start_time);
 		printf("%d\t", philo->name);
 		printf("%s\n", str);
 	}
@@ -63,7 +54,7 @@ void	create_philos(t_info *info)
 	int			i;
 	pthread_t	thread;
 
-	gettimeofday(&info->start_time, NULL);
+	info->start_time = get_time_ms();
 	i = 0;
 	while (i < info->num_of_philo)
 	{
