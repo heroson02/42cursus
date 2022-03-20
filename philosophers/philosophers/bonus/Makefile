@@ -1,9 +1,9 @@
-SRCS =	main.c \
-		ft_atoi_ad.c \
-		init.c \
-		utils.c	\
-		check.c	\
-		routine.c
+SRCS =	main_bonus.c \
+		ft_atoi_ad_bonus.c \
+		init_bonus.c \
+		utils_bonus.c	\
+		check_bonus.c	\
+		routine_bonus.c
 SRCS_BONUS = 
 CC = gcc
 CFLAGS= -Wextra -Werror -Wall
