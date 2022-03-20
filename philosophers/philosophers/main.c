@@ -6,28 +6,11 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:25:54 by yson              #+#    #+#             */
-/*   Updated: 2022/03/18 23:46:34 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/20 12:34:23 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
-
-void	join_and_free_philos(t_info *info)
-{
-	int		i;
-
-	i = 0;
-	while (i < info->num_of_philo)
-	{
-		pthread_join(info->philos[i].thread, NULL);
-		pthread_mutex_destroy(&info->philos[i++].check);
-	}
-	free(info->philos);
-	i = 0;
-	while (i < info->num_of_philo)
-		pthread_mutex_destroy(&info->forks[i++]);
-	free(info->forks);
-}
 
 void	create_philos(t_info *info)
 {
@@ -51,6 +34,23 @@ void	create_philos(t_info *info)
 	}
 }
 
+void	end_philos(t_info *info)
+{
+	int		i;
+
+	i = 0;
+	while (i < info->num_of_philo)
+	{
+		pthread_join(info->philos[i].thread, NULL);
+		pthread_mutex_destroy(&info->philos[i++].check);
+	}
+	free(info->philos);
+	i = 0;
+	while (i < info->num_of_philo)
+		pthread_mutex_destroy(&info->forks[i++]);
+	free(info->forks);
+}
+
 int main(int argc, char **argv)
 {
 	t_info info;
@@ -58,5 +58,5 @@ int main(int argc, char **argv)
 	if (!init(argc, argv, &info))
 		return (0);
 	create_philos(&info);
-	join_and_free_philos(&info);
+	end_philos(&info);
 }

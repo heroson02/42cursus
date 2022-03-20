@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 23:46:06 by yson              #+#    #+#             */
-/*   Updated: 2022/03/18 23:46:13 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/20 13:00:14 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ long long   get_time_ms()
 {
     struct timeval time;
 
-    gettimeofday(&time, NULL);
+    gettimeofday(&time, 0);
     return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 

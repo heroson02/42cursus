@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 22:06:39 by yson              #+#    #+#             */
-/*   Updated: 2022/03/18 23:47:48 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/20 12:59:39 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*check_goal(void *data)
 			info->finish = 1;
 		pthread_mutex_unlock(&info->finish_mutex);
 	}
-	return (NULL);
+	return (0);
 }
 
 void	*monitor(void *data)
@@ -46,5 +46,5 @@ void	*monitor(void *data)
 		pthread_mutex_unlock(&philo->info->finish_mutex);
 		pthread_mutex_unlock(&philo->check);
 	}
-	return (NULL);
+	return (0);
 }
