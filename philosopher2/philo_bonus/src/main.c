@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 21:41:24 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/06/23 21:17:02 by jaeskim          ###   ########.fr       */
+/*   Updated: 2022/03/20 16:35:56 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ int	main(int argc, char *argv[])
 		pthread_create(&thread, NULL, monitor_each_must_eat, &info);
 	pthread_create(&thread, NULL, finish_monitor, &info);
 	join_and_free_philos(&info);
+	system("leaks philo_bonus");
 	return (0);
 }

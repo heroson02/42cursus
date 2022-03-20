@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 13:43:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2022/03/18 19:28:16 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/20 12:18:31 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,46 +45,11 @@ int malloc_arr(t_info *info)
 	return (FT_SUCCESS);
 }
 
-// int	init_philos(t_info *info)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	if (malloc_arr(info))
-// 		return (FT_ERROR);
-// 	if (pthread_mutex_init(&info->finish_mutex, NULL))
-// 		return (FT_ERROR);
-// 	while (i < info->num_of_philo)
-// 	{
-// 		info->philos->n = i;
-// 		info->philos->info = info;
-// 		if (pthread_mutex_init(&info->philos[i].check_mutex, NULL))
-// 			return (FT_ERROR);
-// 		if (pthread_mutex_init(&info->forks[i], NULL))
-// 			return (FT_ERROR);
-// 		// if (i == 0)
-// 		// 	info->philos[i].left = &info->forks[info->num_of_philo - 1];
-// 		// else
-// 		// 	info->philos[i].left = &info->forks[i - 1];
-// 		// info->philos[i].right = &info->forks[i];
-// 		info->philos[i].left = &info->forks[i];
-// 		if (i + 1 == info->num_of_philo)
-// 			info->philos[i].right = &info->forks[0];
-// 		else
-// 			info->philos[i].right = &info->forks[i + 1];
-// 		i++;
-// 	}
-// 	return (FT_SUCCESS);
-// }
-
 static int	init_philos(t_info *info)
 {
 	int		i;
 
 	pthread_mutex_init(&info->finish_mutex, NULL);
-	// if (ft_malloc(&info->philos, sizeof(t_philo) * info->num_of_philo) || \
-	// 	ft_malloc(&info->forks, sizeof(pthread_mutex_t) * info->num_of_philo))
-	// 	return (ft_puterror("ERROR: malloc failed\n"));
 	malloc_arr(info);
 	i = 0;
 	while (i < info->num_of_philo)
@@ -92,11 +57,6 @@ static int	init_philos(t_info *info)
 		info->philos[i].n = i;
 		pthread_mutex_init(&info->forks[i], NULL);
 		pthread_mutex_init(&info->philos[i].check_mutex, NULL);
-		// if (i == 0)
-		// 	info->philos[i].left = &info->forks[info->num_of_philo - 1];
-		// else
-		// 	info->philos[i].left = &info->forks[i - 1];
-		// info->philos[i].right = &info->forks[i];
 		info->philos[i].left = &info->forks[i];
 		if (i + 1 == info->num_of_philo)
 			info->philos[i].right = &info->forks[0];
