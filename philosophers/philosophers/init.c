@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:44:42 by yson              #+#    #+#             */
-/*   Updated: 2022/03/20 13:00:48 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/21 20:29:21 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,14 @@ int	handle_arg(int argc, char **argv, t_info *info)
 	return (1);
 }
 
-int	ft_malloc(void *target, size_t size)
-{
-	*(void **)target = malloc(size);
-	if (*(void **)target == 0)
-		return (0);
-	memset(*(void **)target, 0, size);
-	return (1);
-}
-
 int malloc_arr(t_info *info)
 {
-	if (!ft_malloc(&info->philos, sizeof(t_philo) * info->num_of_philo) ||
-		!ft_malloc(&info->forks ,sizeof(pthread_mutex_t) * info->num_of_philo))
+	info->philos = malloc(sizeof(t_philo) * info->num_of_philo);
+	info->forks = malloc(sizeof(pthread_mutex_t) * info->num_of_philo);
+	if (!info->philos || !info->forks)
 		return (0);
+	memset(info->philos, 0, sizeof(t_philo) * info->num_of_philo);
+	memset(info->forks, 0,  sizeof(pthread_mutex_t) * info->num_of_philo);
 	return (1);
 }
 
