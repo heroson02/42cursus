@@ -6,11 +6,11 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 22:06:39 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 18:15:23 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 18:39:01 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philosopher.h"
+#include "include/philosopher.h"
 
 void	*check_goal(void *data)
 {

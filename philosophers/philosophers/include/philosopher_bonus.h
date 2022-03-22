@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:42:29 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 18:02:03 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 18:41:59 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ long long	get_time_ms(void);
 char		*ft_itoa(int n);
 void		*finish_check(void *data);
 void		error_exit(void);
+int			malloc_arr(t_info *info);
 #endif

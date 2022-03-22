@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_bonus.c                                       :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:44:42 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 18:19:24 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 18:39:45 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philosopher_bonus.h"
+#include "include/philosopher.h"
 
 int	arg_range_check(t_info *info, int argc)
 {
@@ -36,15 +36,15 @@ int	handle_arg(int argc, char **argv, t_info *info)
 	return (1);
 }
 
-sem_t	*init_sem(char *name, unsigned int num)
+int	malloc_arr(t_info *info)
 {
-	sem_t	*result;
-
-	result = sem_open(name, O_CREAT | O_EXCL, 0644, num);
-	if (result != SEM_FAILED)
-		return (result);
-	sem_unlink(name);
-	return (sem_open(name, O_CREAT | O_EXCL, 0644, num));
+	info->philos = malloc(sizeof(t_philo) * info->num_of_philo);
+	info->forks = malloc(sizeof(pthread_mutex_t) * info->num_of_philo);
+	if (!info->philos || !info->forks)
+		return (0);
+	memset(info->philos, 0, sizeof(t_philo) * info->num_of_philo);
+	memset(info->forks, 0, sizeof(pthread_mutex_t) * info->num_of_philo);
+	return (1);
 }
 
 int	init_philos(t_info *info)
@@ -54,16 +54,23 @@ int	init_philos(t_info *info)
 	i = 0;
 	if (!malloc_arr(info))
 		return (0);
-	info->finish_sem = init_sem("finish_sem", 0);
-	info->print_sem = init_sem("print_sem", 1);
-	info->eat_amount_goal = init_sem("eat_amount_goal", 1);
-	info->forks = init_sem("forks", info->num_of_philo);
+	if (pthread_mutex_init(&info->finish_mutex, NULL))
+		return (0);
+	if (pthread_mutex_init(&info->print_mutex, NULL))
+		return (0);
 	while (i < info->num_of_philo)
 	{
 		info->philos[i].name = i;
-		info->philos[i].sem_name = ft_itoa(i + 1);
 		info->philos[i].info = info;
-		info->philos[i].check = init_sem(info->philos[i].sem_name, 1);
+		if (pthread_mutex_init(&info->philos[i].check, NULL))
+			return (0);
+		if (pthread_mutex_init(&info->forks[i], NULL))
+			return (0);
+		info->philos[i].left = &info->forks[i];
+		if (i + 1 == info->num_of_philo)
+			info->philos[i].right = &info->forks[0];
+		else
+			info->philos[i].right = &info->forks[i + 1];
 		i++;
 	}
 	return (1);

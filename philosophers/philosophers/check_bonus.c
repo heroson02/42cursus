@@ -6,11 +6,11 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 22:06:39 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 18:19:04 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 18:38:59 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philosopher_bonus.h"
+#include "include/philosopher_bonus.h"
 
 void	*finish_check(void *data)
 {
