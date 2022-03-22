@@ -6,11 +6,11 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:44:42 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 17:58:35 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 18:19:24 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher_bonus.h"
+#include "../include/philosopher_bonus.h"
 
 int	arg_range_check(t_info *info, int argc)
 {

@@ -1,29 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   check_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 22:06:39 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 17:17:51 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 18:19:04 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
+#include "../include/philosopher_bonus.h"
+
+void	*finish_check(void *data)
+{
+	t_info	*info;
+	int		i;
+
+	info = (t_info *)data;
+	i = -1;
+	sem_wait(info->finish_sem);
+	while (++i < info->num_of_philo)
+		kill(info->philos[i].pid, SIGTERM);
+	return (0);
+}
 
 void	*check_goal(void *data)
 {
 	t_info	*info;
+	int		i;
 
+	i = 0;
 	info = (t_info *)data;
-	while (!info->finish)
+	while (i < info->num_of_philo)
 	{
-		pthread_mutex_lock(&info->finish_mutex);
-		if (info->eat_amount_goal == info->num_of_philo)
-			info->finish = 1;
-		pthread_mutex_unlock(&info->finish_mutex);
+		sem_wait(info->eat_amount_goal);
+		i++;
 	}
+	sem_post(info->finish_sem);
 	return (0);
 }
 
@@ -35,18 +49,19 @@ void	*monitor(void *data)
 	philo = (t_philo *)data;
 	while (!philo->info->finish)
 	{
-		pthread_mutex_lock(&philo->check);
-		pthread_mutex_lock(&philo->info->finish_mutex);
+		sem_wait(philo->check);
+		sem_wait(philo->info->print_sem);
 		ms = get_time_ms() - philo->last_time_to_eat;
-		if (ms >= philo->info->time_to_die && philo->info->finish == 0)
+		if (ms >= philo->info->time_to_die)
 		{
-			if (philo->info->num_of_philo == 1)
-				pthread_mutex_unlock(philo->right);
-			print_mutex(philo, "died");
-			philo->info->finish = 1;
+			printf("%lld\t", get_time_ms() - philo->info->start_time);
+			printf("%d\t", philo->name + 1);
+			printf("%s\n", "died");
+			sem_post(philo->info->finish_sem);
+			return (0);
 		}
-		pthread_mutex_unlock(&philo->info->finish_mutex);
-		pthread_mutex_unlock(&philo->check);
+		sem_post(philo->info->print_sem);
+		sem_post(philo->check);
 	}
 	return (0);
 }

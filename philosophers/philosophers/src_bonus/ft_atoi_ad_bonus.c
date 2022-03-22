@@ -6,11 +6,11 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:42:03 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 17:54:45 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 18:19:19 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher_bonus.h"
+#include "../include/philosopher_bonus.h"
 
 static int	ft_isdigit(int c)
 {

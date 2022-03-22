@@ -1,16 +1,23 @@
-SRCS =	main.c \
-		ft_atoi_ad.c \
-		init.c \
-		utils.c	\
-		check.c	\
-		routine.c
-SRCS_BONUS = 
+SRCS =			src/main.c \
+				src/ft_atoi_ad.c \
+				src/init.c \
+				src/utils.c	\
+				src/check.c	\
+				src/routine.c
+SRCS_BONUS =	src_bonus/main_bonus.c \
+				src_bonus/ft_atoi_ad_bonus.c \
+				src_bonus/init_bonus.c \
+				src_bonus/utils_bonus.c	\
+				src_bonus/check_bonus.c	\
+				src_bonus/routine_bonus.c	\
+				src_bonus/ft_itoa.c
 CC = gcc
 CFLAGS= -Wextra -Werror -Wall
-HEADER = includes
+HEADER = include
 OBJ = $(SRCS:.c=.o)
 OBJ_BONUS = $(SRCS_BONUS:.c=.o)
 NAME = philo
+BONUS_NAME = philo_bonus
 
 $(NAME) :  $(OBJ)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
@@ -21,13 +28,13 @@ $(NAME) :  $(OBJ)
 all : $(NAME)
 
 clean :
-	rm -rf $(OBJ)
+	rm -rf $(OBJ) $(OBJ_BONUS)
 
 fclean : clean
-	rm -rf $(NAME)
+	rm -rf $(NAME) $(BONUS_NAME)
 
 bonus :   $(OBJ_BONUS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_BONUS)
+	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(OBJ_BONUS)
 
 re : fclean all
 

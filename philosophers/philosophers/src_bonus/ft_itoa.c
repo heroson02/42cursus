@@ -6,11 +6,11 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 17:24:45 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 17:54:50 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 18:19:22 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher_bonus.h"
+#include "../include/philosopher_bonus.h"
 
 static int	ft_numlen(int n)
 {
