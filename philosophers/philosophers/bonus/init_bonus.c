@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:44:42 by yson              #+#    #+#             */
-/*   Updated: 2022/03/20 17:27:22 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 15:05:28 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ sem_t	*init_sem(char *name, unsigned int num)
 	if (result != SEM_FAILED)
 		return (result);
 	sem_unlink(name);
-	exit(0); //에러를 이렇게 처리하는게 맞는지 체크하기
-	// return (sem_open(name, O_CREAT | O_EXCL, 0644, num));
+	return (sem_open(name, O_CREAT | O_EXCL, 0644, num));
 }
 
 int	init_philos(t_info *info)
@@ -74,7 +73,7 @@ int	init_philos(t_info *info)
 		return (0);
 	info->finish_sem = init_sem("finish_sem", 0);
 	info->print_sem = init_sem("print_sem", 1);
-	info->routine_sem = init_sem("routine_sem", 1);
+	info->eat_amount_goal = init_sem("eat_amount_goal", 1);
 	info->forks = init_sem("forks", info->num_of_philo + 1);
 	while (i < info->num_of_philo)
 	{

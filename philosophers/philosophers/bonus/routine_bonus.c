@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 22:07:55 by yson              #+#    #+#             */
-/*   Updated: 2022/03/20 15:01:46 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 16:44:25 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,24 @@
 
 void	pickup_fork(t_philo *philo)
 {
-	pthread_mutex_lock(philo->right);
+	sem_wait(philo->info->forks);
 	print_mutex(philo, "has taken a fork");
-	pthread_mutex_lock(philo->left);
+	sem_wait(philo->info->forks);
 	print_mutex(philo, "has taken a fork");
 }
 
 void	eating(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->check);
+	sem_wait(philo->check);
 	philo->last_time_to_eat = get_time_ms();
-	pthread_mutex_lock(&philo->info->finish_mutex);
-	if (!philo->info->finish)
-		print_mutex(philo, "is eating");
+	print_mutex(philo, "is eating");
 	philo->eat_amount += 1;
 	if (philo->eat_amount == philo->info->num_of_must_eat)
-		philo->info->eat_amount_goal += 1;
-	pthread_mutex_unlock(&philo->info->finish_mutex);
+		sem_post(philo->info->eat_amount_goal);
 	usleep(philo->info->time_to_eat * 1000);
-	pthread_mutex_unlock(philo->right);
-	pthread_mutex_unlock(philo->left);
-	pthread_mutex_unlock(&philo->check);
+	sem_post(philo->info->forks);
+	sem_post(philo->info->forks);
+	sem_post(philo->check);
 }
 
 void	sleeping(t_philo *philo)
@@ -48,19 +45,19 @@ void	thinking(t_philo *philo)
 	print_mutex(philo, "is thinking");
 }
 
-void	*philo(void *data)
+void	philo(t_philo *philo)
 {
-	t_philo	*philo;
+	pthread_t thread;
 
-	philo = (t_philo *)data;
+	pthread_create(&thread, NULL, monitor, philo);
 	if (philo->name % 2 == 0)
 		usleep(philo->info->time_to_eat * 1000);
-	while (!philo->info->finish)
+	while (1)
 	{
 		pickup_fork(philo);
 		eating(philo);
 		sleeping(philo);
 		thinking(philo);
 	}
-	return (0);
+	exit(0);
 }

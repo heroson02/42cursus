@@ -3,14 +3,15 @@ SRCS =	main_bonus.c \
 		init_bonus.c \
 		utils_bonus.c	\
 		check_bonus.c	\
-		routine_bonus.c
+		routine_bonus.c	\
+		ft_itoa.c
 SRCS_BONUS = 
 CC = gcc
 CFLAGS= -Wextra -Werror -Wall
 HEADER = includes
 OBJ = $(SRCS:.c=.o)
 OBJ_BONUS = $(SRCS_BONUS:.c=.o)
-NAME = philo
+NAME = philo_bonus
 
 $(NAME) :  $(OBJ)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
