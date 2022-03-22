@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 22:06:39 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 18:38:59 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 20:57:38 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ void	*finish_check(void *data)
 {
 	t_info	*info;
 	int		i;
+	int		val;
 
 	info = (t_info *)data;
 	i = -1;
 	sem_wait(info->finish_sem);
 	while (++i < info->num_of_philo)
-		kill(info->philos[i].pid, SIGTERM);
+		val = kill(info->philos[i].pid, SIGTERM);
+	if (val == -1)
+		error_exit();
 	return (0);
 }
 

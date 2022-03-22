@@ -6,17 +6,35 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 23:46:06 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 18:39:30 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 21:00:39 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/philosopher.h"
 
+void	error_exit(void)
+{
+	printf("Error Occured\n");
+	exit(1);
+}
+
+void	ft_usleep(int n)
+{
+	int val;
+
+	val = usleep(n);
+	if (val)
+		error_exit();
+}
+
 long long	get_time_ms(void)
 {
 	struct timeval	time;
+	int				val;
 
-	gettimeofday(&time, 0);
+	val = gettimeofday(&time, 0);
+	if (val)
+		error_exit();
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 

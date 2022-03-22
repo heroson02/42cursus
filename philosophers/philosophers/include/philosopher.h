@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:42:29 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 17:54:22 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 21:04:57 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,6 @@ void		*monitor(void *data);
 
 void		print_mutex(t_philo *philo, char *str);
 long long	get_time_ms(void);
+void		ft_usleep(int n);
+void		error_exit(void);
 #endif

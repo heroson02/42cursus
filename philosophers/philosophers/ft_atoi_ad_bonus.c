@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:42:03 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 18:39:04 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 21:05:36 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static unsigned long long	ft_atoi(char *str)
 	while (str[i] != '\0')
 	{
 		if (!ft_isdigit(str[i]))
-			exit(0);
+			error_exit();
 		if (is_contain("0123456789", str[i]) != -1)
 			result = result * base_len + (is_contain("0123456789", str[i++]));
 	}
@@ -68,6 +68,6 @@ int	ft_atoi_ad(char *str)
 
 	num = ft_atoi(str);
 	if (num > 2147483647 || num < -2147483648)
-		exit(0);
+		error_exit();
 	return ((int)num);
 }

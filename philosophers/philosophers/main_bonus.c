@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:25:54 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 18:39:15 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 21:03:00 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,11 @@ int	main(int argc, char **argv)
 		return (0);
 	create_philos(&info);
 	if (info.num_of_must_eat != 0)
-		pthread_create(&thread, NULL, check_goal, &info);
-	pthread_create(&thread, NULL, finish_check, &info);
+	{
+		if (pthread_create(&thread, NULL, check_goal, &info))
+			error_exit();
+	}
+	if (pthread_create(&thread, NULL, finish_check, &info))
+		error_exit();
 	end_philos(&info);
 }

@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 22:07:55 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 18:39:23 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 21:04:46 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	eating(t_philo *philo)
 	philo->eat_amount += 1;
 	if (philo->eat_amount == philo->info->num_of_must_eat)
 		sem_post(philo->info->eat_amount_goal);
-	usleep(philo->info->time_to_eat * 1000);
+	ft_usleep(philo->info->time_to_eat * 1000);
 	sem_post(philo->info->forks);
 	sem_post(philo->info->forks);
 	sem_post(philo->check);
@@ -37,7 +37,7 @@ void	eating(t_philo *philo)
 void	sleeping(t_philo *philo)
 {
 	print_mutex(philo, "is sleeping");
-	usleep(philo->info->time_to_sleep * 1000);
+	ft_usleep(philo->info->time_to_sleep * 1000);
 }
 
 void	thinking(t_philo *philo)
@@ -49,9 +49,10 @@ void	philo(t_philo *philo)
 {
 	pthread_t	thread;
 
-	pthread_create(&thread, NULL, monitor, philo);
+	if (pthread_create(&thread, NULL, monitor, philo))
+		error_exit();
 	if (philo->name % 2 == 0)
-		usleep(philo->info->time_to_eat * 1000);
+		ft_usleep(philo->info->time_to_eat * 1000);
 	while (1)
 	{
 		pickup_fork(philo);
