@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 22:06:39 by yson              #+#    #+#             */
-/*   Updated: 2022/03/20 12:59:39 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 17:17:51 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	*monitor(void *data)
 		ms = get_time_ms() - philo->last_time_to_eat;
 		if (ms >= philo->info->time_to_die && philo->info->finish == 0)
 		{
+			if (philo->info->num_of_philo == 1)
+				pthread_mutex_unlock(philo->right);
 			print_mutex(philo, "died");
 			philo->info->finish = 1;
 		}
