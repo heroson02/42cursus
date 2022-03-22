@@ -1,10 +1,10 @@
-SRCS =			src/main.c \
+SRCS_NAME =			src/main.c \
 				src/ft_atoi_ad.c \
 				src/init.c \
 				src/utils.c	\
 				src/check.c	\
 				src/routine.c
-SRCS_BONUS =	src_bonus/main_bonus.c \
+SRCS_BONUS_NAME =	src_bonus/main_bonus.c \
 				src_bonus/ft_atoi_ad_bonus.c \
 				src_bonus/init_bonus.c \
 				src_bonus/utils_bonus.c	\
@@ -14,8 +14,12 @@ SRCS_BONUS =	src_bonus/main_bonus.c \
 CC = gcc
 CFLAGS= -Wextra -Werror -Wall
 HEADER = include
-OBJ = $(SRCS:.c=.o)
-OBJ_BONUS = $(SRCS_BONUS:.c=.o)
+OBJ = $(SRCS_NAME:.c=.o)
+OBJ_BONUS = $(SRCS_BONUS_NAME:.c=.o)
+SRCS = $(addprefix $(SRCS_DIR), $(SRCS_NAME))
+SRCS_DIR = src
+SRCS_BONUS_DIR = src_bonus
+SRCS_BONUS = $(addprefix $(SRCS_BONUS_DIR), $(SRCS_BONUS_NAME))
 NAME = philo
 BONUS_NAME = philo_bonus
 
