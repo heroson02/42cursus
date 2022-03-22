@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:42:29 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 15:05:10 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 18:02:03 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,16 @@ typedef struct s_info
 	t_philo			*philos;
 }	t_info;
 
-int	ft_atoi_ad(char *str);
-int init(int argc, char **argv, t_info *info);
+int			ft_atoi_ad(char *str);
+int			init(int argc, char **argv, t_info *info);
 
-void	philo(t_philo *philo);
-void	*check_goal(void *data);
-void	*monitor(void *data);
+void		philo(t_philo *philo);
+void		*check_goal(void *data);
+void		*monitor(void *data);
 
-void    print_mutex(t_philo *philo, char *str);
-long long   get_time_ms();
-char	*ft_itoa(int n);
-void	*finish_check(void *data);
-void		error_exit();
+void		print_mutex(t_philo *philo, char *str);
+long long	get_time_ms(void);
+char		*ft_itoa(int n);
+void		*finish_check(void *data);
+void		error_exit(void);
 #endif

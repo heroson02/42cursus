@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:44:42 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 15:05:28 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 17:58:35 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,9 @@ int	handle_arg(int argc, char **argv, t_info *info)
 	return (1);
 }
 
-int	ft_malloc(void *target, size_t size)
-{
-	*(void **)target = malloc(size);
-	if (*(void **)target == 0)
-		return (0);
-	memset(*(void **)target, 0, size);
-	return (1);
-}
-
-int malloc_arr(t_info *info)
-{
-	if (!ft_malloc(&info->philos, sizeof(t_philo) * info->num_of_philo) ||
-		!ft_malloc(&info->forks ,sizeof(pthread_mutex_t) * info->num_of_philo))
-		return (0);
-	return (1);
-}
-
 sem_t	*init_sem(char *name, unsigned int num)
 {
-	sem_t *result;
+	sem_t	*result;
 
 	result = sem_open(name, O_CREAT | O_EXCL, 0644, num);
 	if (result != SEM_FAILED)
@@ -66,7 +49,7 @@ sem_t	*init_sem(char *name, unsigned int num)
 
 int	init_philos(t_info *info)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!malloc_arr(info))
@@ -74,7 +57,7 @@ int	init_philos(t_info *info)
 	info->finish_sem = init_sem("finish_sem", 0);
 	info->print_sem = init_sem("print_sem", 1);
 	info->eat_amount_goal = init_sem("eat_amount_goal", 1);
-	info->forks = init_sem("forks", info->num_of_philo + 1);
+	info->forks = init_sem("forks", info->num_of_philo);
 	while (i < info->num_of_philo)
 	{
 		info->philos[i].name = i;
@@ -86,7 +69,7 @@ int	init_philos(t_info *info)
 	return (1);
 }
 
-int init(int argc, char **argv, t_info *info)
+int	init(int argc, char **argv, t_info *info)
 {
 	if (argc != 5 && argc != 6)
 		return (0);

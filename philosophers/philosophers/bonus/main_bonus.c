@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:25:54 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 15:07:20 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 17:58:55 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	end_philos(t_info *info)
 	sem_close(info->eat_amount_goal);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_info info;
+	t_info		info;
 	pthread_t	thread;
 
 	if (!init(argc, argv, &info))

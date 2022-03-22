@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 22:07:55 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 16:44:25 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 17:59:05 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	thinking(t_philo *philo)
 
 void	philo(t_philo *philo)
 {
-	pthread_t thread;
+	pthread_t	thread;
 
 	pthread_create(&thread, NULL, monitor, philo);
 	if (philo->name % 2 == 0)

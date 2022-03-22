@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:25:54 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 16:45:32 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/22 17:46:48 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	end_philos(t_info *info)
 	free(info->forks);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_info info;
+	t_info	info;
 
 	if (!init(argc, argv, &info))
 		return (0);
