@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:25:54 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 21:07:59 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/23 12:36:07 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	create_philos(t_info *info)
 	while (i < info->num_of_philo)
 	{
 		info->philos[i].last_time_to_eat = info->start_time;
-		if (pthread_create(&info->philos[i].thread, NULL, philo, &info->philos[i]))
+		if (pthread_create(&info->philos[i].thread, \
+			NULL, philo, &info->philos[i]))
 			error_exit();
 		if (pthread_create(&thread, NULL, monitor, &info->philos[i]))
 			error_exit();

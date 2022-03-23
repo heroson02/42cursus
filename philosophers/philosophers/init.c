@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:44:42 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 18:39:45 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/23 12:41:23 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int	arg_range_check(t_info *info, int argc)
 {
 	if (info->num_of_must_eat < 1 && argc == 6)
-		return (0);
+		error_exit();
 	if (info->num_of_must_eat < 0 || info->time_to_die < 0 \
 		|| info->time_to_eat < 0 || info->time_to_sleep < 0)
-		return (0);
+		error_exit();
 	return (1);
 }
 
