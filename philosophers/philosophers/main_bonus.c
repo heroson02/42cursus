@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:25:54 by yson              #+#    #+#             */
-/*   Updated: 2022/03/23 12:37:38 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/23 12:44:20 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,4 @@ int	main(int argc, char **argv)
 	if (pthread_create(&thread, NULL, finish_check, &info))
 		error_exit();
 	end_philos(&info);
-	system("leaks philo_bonus");
 }
