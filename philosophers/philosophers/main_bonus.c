@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:25:54 by yson              #+#    #+#             */
-/*   Updated: 2022/03/23 12:44:20 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/24 12:00:02 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int argc, char **argv)
 	pthread_t	thread;
 
 	if (!init(argc, argv, &info))
-		return (0);
+		error_exit();
 	create_philos(&info);
 	if (info.num_of_must_eat != 0)
 	{

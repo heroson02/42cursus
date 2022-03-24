@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 22:07:55 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 21:01:41 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/24 12:15:14 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	eating(t_philo *philo)
 	if (philo->eat_amount == philo->info->num_of_must_eat)
 		philo->info->eat_amount_goal += 1;
 	pthread_mutex_unlock(&philo->info->finish_mutex);
-	ft_usleep(philo->info->time_to_eat * 1000);
+	ft_usleep(philo->info->time_to_eat);
 	pthread_mutex_unlock(philo->right);
 	pthread_mutex_unlock(philo->left);
 	pthread_mutex_unlock(&philo->check);
@@ -40,7 +40,7 @@ void	eating(t_philo *philo)
 void	sleeping(t_philo *philo)
 {
 	print_mutex(philo, "is sleeping");
-	ft_usleep(philo->info->time_to_sleep * 1000);
+	ft_usleep(philo->info->time_to_sleep);
 }
 
 void	thinking(t_philo *philo)
@@ -54,7 +54,7 @@ void	*philo(void *data)
 
 	philo = (t_philo *)data;
 	if (philo->name % 2 == 0)
-		ft_usleep(philo->info->time_to_eat * 1000);
+		ft_usleep(philo->info->time_to_eat);
 	while (!philo->info->finish)
 	{
 		pickup_fork(philo);

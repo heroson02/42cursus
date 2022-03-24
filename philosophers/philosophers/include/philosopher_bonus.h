@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:42:29 by yson              #+#    #+#             */
-/*   Updated: 2022/03/23 12:40:14 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/24 12:01:46 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_philo
 
 typedef struct s_info
 {
-	int				finish;
 	int				num_of_philo;
 	int				time_to_die;
 	int				time_to_eat;

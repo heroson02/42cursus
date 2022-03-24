@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 22:06:39 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 20:57:38 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/24 12:01:42 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	*monitor(void *data)
 	long long		ms;
 
 	philo = (t_philo *)data;
-	while (!philo->info->finish)
+	while (1)
 	{
 		sem_wait(philo->check);
 		sem_wait(philo->info->print_sem);
