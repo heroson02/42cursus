@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:44:42 by yson              #+#    #+#             */
-/*   Updated: 2022/03/24 12:09:04 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/24 15:58:36 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	init_philos(t_info *info)
 		return (0);
 	if (pthread_mutex_init(&info->finish_mutex, NULL))
 		return (0);
+	pthread_mutex_lock(&info->finish_mutex);
 	if (pthread_mutex_init(&info->print_mutex, NULL))
 		return (0);
 	while (i < info->num_of_philo)

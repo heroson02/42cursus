@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 22:07:55 by yson              #+#    #+#             */
-/*   Updated: 2022/03/24 12:15:14 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/24 23:11:07 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,25 @@ void	pickup_fork(t_philo *philo)
 
 void	eating(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->check);
 	philo->last_time_to_eat = get_time_ms();
-	pthread_mutex_lock(&philo->info->finish_mutex);
-	if (!philo->info->finish)
-		print_mutex(philo, "is eating");
+	print_mutex(philo, "is eating\t");
+	ft_usleep(philo->info->time_to_eat);
 	philo->eat_amount += 1;
 	if (philo->eat_amount == philo->info->num_of_must_eat)
 		philo->info->eat_amount_goal += 1;
-	pthread_mutex_unlock(&philo->info->finish_mutex);
-	ft_usleep(philo->info->time_to_eat);
 	pthread_mutex_unlock(philo->right);
 	pthread_mutex_unlock(philo->left);
-	pthread_mutex_unlock(&philo->check);
 }
 
 void	sleeping(t_philo *philo)
 {
-	print_mutex(philo, "is sleeping");
+	print_mutex(philo, "is sleeping\t");
 	ft_usleep(philo->info->time_to_sleep);
 }
 
 void	thinking(t_philo *philo)
 {
-	print_mutex(philo, "is thinking");
+	print_mutex(philo, "is thinking\t");
 }
 
 void	*philo(void *data)
@@ -61,6 +56,7 @@ void	*philo(void *data)
 		eating(philo);
 		sleeping(philo);
 		thinking(philo);
+		usleep(100);
 	}
 	return (0);
 }
