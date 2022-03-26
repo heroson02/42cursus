@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:25:54 by yson              #+#    #+#             */
-/*   Updated: 2022/03/24 22:55:42 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/27 01:58:25 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ void	end_philos(t_info *info)
 	i = 0;
 	pthread_mutex_lock(&info->finish_mutex);
 	pthread_mutex_unlock(&info->finish_mutex);
-	while (i < info->num_of_philo)
-		pthread_mutex_destroy(&info->philos[i++].check);
 	free(info->philos);
 	i = 0;
 	while (i < info->num_of_philo)

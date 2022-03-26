@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:42:29 by yson              #+#    #+#             */
-/*   Updated: 2022/03/22 21:04:57 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/27 01:54:34 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_philo
 	pthread_mutex_t	*right;
 	pthread_t		thread;
 	struct s_info	*info;
-	pthread_mutex_t	check;
 	long long		last_time_to_eat;
 }	t_philo;
 
@@ -43,6 +42,7 @@ typedef struct s_info
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	finish_mutex;
 	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	death_mutex;
 	long long		start_time;
 	t_philo			*philos;
 }	t_info;

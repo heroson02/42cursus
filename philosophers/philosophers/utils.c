@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 23:46:06 by yson              #+#    #+#             */
-/*   Updated: 2022/03/24 23:24:31 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/27 01:49:03 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,13 @@ long long	get_time_ms(void)
 
 void	print_mutex(t_philo *philo, char *str)
 {
-	if (philo->info->finish)
-		return ;
 	pthread_mutex_lock(&philo->info->print_mutex);
-	printf("%lld\t", get_time_ms() - philo->info->start_time);
-	printf("%d\t", philo->name + 1);
-	printf("%s\t", str);
-	printf("%d\n", philo->eat_amount);
+	if (philo->info->finish)
+	{
+		pthread_mutex_unlock(&philo->info->print_mutex);
+		return ;
+	}
+	printf("%lld\t%d\t%s\t%d\n", get_time_ms() - philo->info->start_time, \
+		philo->name, str, philo->eat_amount);
 	pthread_mutex_unlock(&philo->info->print_mutex);
 }
