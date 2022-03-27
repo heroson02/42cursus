@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 23:46:06 by yson              #+#    #+#             */
-/*   Updated: 2022/03/27 13:26:14 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/27 13:27:59 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,6 @@ void	error_exit(void)
 {
 	printf("Error Occured\n");
 	exit(1);
-}
-
-void	ft_usleep(int n)
-{
-	long long	start;
-
-	start = get_time_ms();
-	while (get_time_ms() - start < n)
-		usleep(100);
 }
 
 long long	get_time_ms(void)
