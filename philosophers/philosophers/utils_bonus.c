@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 23:46:06 by yson              #+#    #+#             */
-/*   Updated: 2022/03/27 13:25:27 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/27 13:26:14 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ long long	get_time_ms(void)
 void	print_mutex(t_philo *philo, char *str)
 {
 	sem_wait(philo->info->print_sem);
-	printf("%lld\t%d\t%s\t%d\n", get_time_ms() - philo->info->start_time, \
-		philo->name + 1, str, philo->eat_amount);
+	printf("%lld\t%d\t%s\n", get_time_ms() - philo->info->start_time, \
+		philo->name + 1, str);
 	sem_post(philo->info->print_sem);
 }
