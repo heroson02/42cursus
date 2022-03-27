@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 23:46:06 by yson              #+#    #+#             */
-/*   Updated: 2022/03/27 01:49:03 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/27 13:25:02 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void	ft_usleep(int n)
 	start = get_time_ms();
 	while (get_time_ms() - start < n)
 	{
-		if (usleep(100))
-			error_exit();
+		usleep(100);
 	}
 }
 
@@ -50,6 +49,6 @@ void	print_mutex(t_philo *philo, char *str)
 		return ;
 	}
 	printf("%lld\t%d\t%s\t%d\n", get_time_ms() - philo->info->start_time, \
-		philo->name, str, philo->eat_amount);
+		philo->name + 1, str, philo->eat_amount);
 	pthread_mutex_unlock(&philo->info->print_mutex);
 }
