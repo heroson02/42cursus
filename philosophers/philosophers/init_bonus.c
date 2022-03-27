@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:44:42 by yson              #+#    #+#             */
-/*   Updated: 2022/03/27 13:08:08 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/27 19:06:15 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	init_philos(t_info *info)
 		return (0);
 	info->finish_sem = init_sem("finish_sem", 0);
 	info->print_sem = init_sem("print_sem", 1);
-	info->eat_amount_goal = init_sem("eat_amount_goal", 1);
+	info->eat_amount_goal = init_sem("eat_amount_goal", 0);
 	info->forks = init_sem("forks", info->num_of_philo);
 	while (i < info->num_of_philo)
 	{

@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 22:06:39 by yson              #+#    #+#             */
-/*   Updated: 2022/03/27 11:09:27 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/27 19:04:52 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	check_death(t_philo *philo)
 	{
 		pthread_mutex_lock(&philo->info->death_mutex);
 		pthread_mutex_lock(&philo->info->print_mutex);
-		printf("%lld\t%d\tdied\t\t\t%d\n", get_time_ms() - \
-			philo->info->start_time, philo->name, philo->eat_amount);
+		printf("%lld\t%d\tdied\n", get_time_ms() - \
+			philo->info->start_time, philo->name + 1);
 		philo->info->finish = 1;
 		pthread_mutex_unlock(&philo->info->finish_mutex);
 		usleep(100);
