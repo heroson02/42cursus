@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:25:54 by yson              #+#    #+#             */
-/*   Updated: 2022/03/27 01:58:25 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/27 11:11:27 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	create_philos(t_info *info)
 	pthread_t	thread;
 
 	info->start_time = get_time_ms();
-	i = 0;
-	while (i < info->num_of_philo)
+	i = -1;
+	while (++i < info->num_of_philo)
 	{
 		info->philos[i].last_time_to_eat = info->start_time;
 		if (pthread_create(&info->philos[i].thread, \
@@ -27,7 +27,6 @@ void	create_philos(t_info *info)
 			error_exit();
 		if (pthread_detach(info->philos[i].thread))
 			error_exit();
-		++i;
 	}
 	if (pthread_create(&thread, NULL, monitor, info))
 		error_exit();
@@ -49,11 +48,13 @@ void	end_philos(t_info *info)
 	i = 0;
 	pthread_mutex_lock(&info->finish_mutex);
 	pthread_mutex_unlock(&info->finish_mutex);
-	free(info->philos);
-	i = 0;
 	while (i < info->num_of_philo)
 		pthread_mutex_destroy(&info->forks[i++]);
-	// mutex들 전부 destroy 하기
+	pthread_mutex_unlock(&info->death_mutex);
+	pthread_mutex_destroy(&info->finish_mutex);
+	pthread_mutex_destroy(&info->death_mutex);
+	pthread_mutex_destroy(&info->print_mutex);
+	free(info->philos);
 	free(info->forks);
 }
 
