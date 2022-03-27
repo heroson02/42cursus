@@ -20,10 +20,10 @@ NAME = philo
 BONUS_NAME = philo_bonus
 
 $(NAME) :  $(OBJ)
-	$(CC) $(CFLAGS) -g -o $(NAME) $(OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
 %o : %c
-	$(CC) $(CFLAGS) -g -c $< -I$(HEADER)
+	$(CC) $(CFLAGS) -c $< -I$(HEADER)
 
 all : $(NAME)
 

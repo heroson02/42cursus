@@ -6,7 +6,7 @@
 /*   By: yson <yson@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:25:54 by yson              #+#    #+#             */
-/*   Updated: 2022/03/24 12:00:02 by yson             ###   ########.fr       */
+/*   Updated: 2022/03/27 13:09:03 by yson             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,16 @@ void	end_philos(t_info *info)
 	while (i < info->num_of_philo)
 	{
 		waitpid(info->philos[i].pid, &statloc, 0);
+		sem_unlink(info->philos[i].sem_name);
 		sem_close(info->philos[i].check);
 		free(info->philos[i].sem_name);
 		i++;
 	}
 	free(info->philos);
+	sem_unlink("forks");
+	sem_unlink("finish_sem");
+	sem_unlink("print_sem");
+	sem_unlink("eat_amount_goal");
 	sem_close(info->forks);
 	sem_close(info->finish_sem);
 	sem_close(info->print_sem);
