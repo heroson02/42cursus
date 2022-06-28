@@ -1,20 +1,19 @@
-#include "phonebook.hpp"
+#include "PhoneBook.hpp"
 
 int main()
 {
 	std::string	input;
 	PhoneBook	book;
 
-	while (1)
+	while (getline(std::cin, input))
 	{
-		std::cin >> input;
 		if (!input.compare("ADD"))
 		{
 			book.add();
 		}
 		else if (!input.compare("SEARCH"))
 		{
-			std::cout << "search" << std::endl;
+			book.search();
 		}
 		else if (!input.compare("EXIT"))
 			exit(0);
