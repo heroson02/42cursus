@@ -68,7 +68,9 @@ void	PhoneBook::guideline_print()
 
 void	PhoneBook::print_arr_line(int index)
 {
-	print_line(std::to_string(index));
+	std::stringstream ss;
+	ss << index;
+	print_line(ss.str());
 	print_line(arr[index].get_first_name());
 	print_line(arr[index].get_last_name());
 	print_line(arr[index].get_nickname());
