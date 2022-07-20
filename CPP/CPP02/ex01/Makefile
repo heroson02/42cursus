@@ -1,6 +1,6 @@
 SRCS =	main.cpp \
 		Fixed.cpp
-NAME = cocf
+NAME = a.out
 CC = clang++
 FLAGS = -Wall -Wextra -Werror -std=c++98
 OBJS = $(SRCS:.cpp=.o)
