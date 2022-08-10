@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 # include "ShrubberyCreationForm.hpp"
-# include "RobotmyRequestForm.hpp"
+# include "RobotomyRequestForm.hpp"
 # include "PresidentialPardonForm.hpp"
 
 static void testForm(Bureaucrat* bur, Form* form)
@@ -23,8 +23,8 @@ static void testForm(Bureaucrat* bur, Form* form)
 
 int main()
 {
-    // ShrubberyCreationForm* shrub = new ShrubberyCreationForm("Patrick");
-    // RobotmyRequestForm* robot = new RobotmyRequestForm("Bob");
+    ShrubberyCreationForm* shrub = new ShrubberyCreationForm("Patrick");
+    RobotomyRequestForm* robot = new RobotomyRequestForm("Bob");
     PresidentialPardonForm* pardon = new PresidentialPardonForm("Pef");
 
     Bureaucrat* bob = new Bureaucrat("Bob", 120);
@@ -33,16 +33,16 @@ int main()
 
     std::cout << "\033[31mNormal\033[0m tests : " << std::endl;
 
-    // testForm(bob, shrub);
-    // testForm(james, robot);
+    testForm(bob, shrub);
+    testForm(james, robot);
     testForm(meg, pardon);
 
     std::cout << std::endl << "\033[31mAlreadySigned & ToLow\033[0m tests : " << std::endl;
 
     testForm(bob, pardon);
 
-    // delete shrub;
-    // delete robot;
+    delete shrub;
+    delete robot;
     delete pardon;
 
     delete bob;

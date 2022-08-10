@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <exception>
+#include <cstdlib>
+#include <fstream>
 #include "Bureaucrat.hpp"
 
 class Bureaucrat;
