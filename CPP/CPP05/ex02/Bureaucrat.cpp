@@ -51,6 +51,26 @@ void Bureaucrat::decreaseGrade()
 		throw (GradeTooHighException());
 }
 
+void Bureaucrat::signForm(Form &input)
+{
+	if (input.getSign() == true)
+		std::cout	<< name << " couldn't sign " << input.getName()
+						<< " because already signed." << std::endl;
+	else if (input.getSign() == false)
+	{
+		try
+		{
+			input.beSigned(*this);
+			std::cout << name << " signed " << input.getName() << std::endl;
+		}
+		catch(const std::exception& e)
+		{
+			std::cout	<< name << " couldn't sign " << input.getName()
+						<< " because " << e.what() << std::endl;
+		}	
+	}
+}
+
 const char *Bureaucrat::GradeTooHighException::what(void) const throw()
 {
 	return ("GradeTooHighException");
