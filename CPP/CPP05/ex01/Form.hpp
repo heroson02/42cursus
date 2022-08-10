@@ -14,8 +14,8 @@ private:
 	bool				isSign;
 	const int			signGrade;
 	const int			execGrade;
-public:
 	Form(void);
+public:
 	Form(std::string _name, int _signGrade, int _execGrade);
 	Form(const Form &obj);
 	Form& operator= (const Form &obj);

@@ -1,49 +1,53 @@
-#include "Form.hpp"
-#include "Form.hpp"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rchallie <rchallie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/26 21:57:15 by rchallie          #+#    #+#             */
+/*   Updated: 2020/10/15 21:30:39 by rchallie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+# include "ShrubberyCreationForm.hpp"
+# include "RobotmyRequestForm.hpp"
+# include "PresidentialPardonForm.hpp"
+
+static void testForm(Bureaucrat* bur, Form* form)
+{
+    std::cout << std::endl << "Sign & Execute \033[33m" << form->getName() << "\033[0m : " << std::endl;
+    bur->signForm(*form);
+    bur->executeForm(*form);
+}
 
 int main()
 {
-    Form* constitution = new Form("Constitution", 10, 30);
-    Form* toHigh;
-    Form* toLow;
-    
-    std::cout << *constitution;
-    
-    try
-    {
-       toHigh = new Form("ToHigh", 0, 20);
-    }
-    catch(std::exception & e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
+    // ShrubberyCreationForm* shrub = new ShrubberyCreationForm("Patrick");
+    // RobotmyRequestForm* robot = new RobotmyRequestForm("Bob");
+    PresidentialPardonForm* pardon = new PresidentialPardonForm("Pef");
 
-    try
-    {
-       toLow = new Form("ToHigh", 10, 199);
-    }
-    catch(std::exception & e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
+    Bureaucrat* bob = new Bureaucrat("Bob", 120);
+    Bureaucrat* james = new Bureaucrat("James", 33);
+    Bureaucrat* meg = new Bureaucrat("Meg", 1);
 
-    Bureaucrat* bob = new Bureaucrat("Bob", 5);
-    
-    std::cout << *bob;
+    std::cout << "\033[31mNormal\033[0m tests : " << std::endl;
 
-    bob->signForm(*constitution);
+    // testForm(bob, shrub);
+    // testForm(james, robot);
+    testForm(meg, pardon);
 
-    std::cout << *constitution;
+    std::cout << std::endl << "\033[31mAlreadySigned & ToLow\033[0m tests : " << std::endl;
 
-    bob->signForm(*constitution);
+    testForm(bob, pardon);
 
-    Form* nop = new Form("Constitution", 1, 1);
-    Bureaucrat* nopper = new Bureaucrat("Nopper", 12);
+    // delete shrub;
+    // delete robot;
+    delete pardon;
 
-    nopper->signForm(*nop);
-    
-    delete constitution;
     delete bob;
-    delete nop;
-    delete nopper;
+    delete james;
+    delete meg;
+
+    return (0);
 }

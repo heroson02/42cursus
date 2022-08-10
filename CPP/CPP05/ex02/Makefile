@@ -1,6 +1,9 @@
 SRCS =	main.cpp \
 		Bureaucrat.cpp \
-		Form.cpp
+		Form.cpp	\
+		RobotmyRequestForm.cpp \
+		ShrubberyCreationForm.cpp \
+		PresidentialPardonForm.cpp
 NAME = Form
 CC = clang++
 FLAGS = -Wall -Wextra -Werror -std=c++98

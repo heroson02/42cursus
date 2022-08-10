@@ -23,12 +23,27 @@ Bureaucrat& Bureaucrat::operator= (const Bureaucrat &obj)
 
 Bureaucrat::~Bureaucrat() {}
 
-std::string Bureaucrat::getName()
+void Bureaucrat::executeForm(Form const & form)
+{
+	try
+	{
+		form.execute(*this);
+		std::cout << name << " executed " << form.getName() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cout	<< name << " didn't execute " << form.getName()
+					<< " because of " << e.what() << std::endl;
+	}
+	
+}
+
+std::string Bureaucrat::getName() const
 {
 	return (name);
 }
 
-int	Bureaucrat::getGrade()
+int	Bureaucrat::getGrade() const
 {
 	return (grade);
 }

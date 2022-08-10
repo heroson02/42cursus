@@ -63,6 +63,11 @@ void	Form::beSigned(Bureaucrat &obj)
 		isSign = true;
 }
 
+void Form::isExecutable(const Bureaucrat &obj) const
+{
+	if (obj.getGrade() > execGrade)
+		throw GradeTooLowException();
+}
 
 const char *Form::GradeTooHighException::what(void) const throw()
 {
