@@ -29,7 +29,7 @@ void	PhoneBook::remove_add()
 	input_contact(old);
 	count++;
 	old++;
-	if (old > 8)
+	if (old > 7)
 		old = 0;
 }
 
@@ -94,7 +94,7 @@ int		input_valid_check(const char *input, int amount)
 			return (0);
 	}
 	int	num = atoi(input);
-	if (num > amount || num < 0 || num > 7)
+	if (num > amount - 1 || num < 0 || num > 7)
 		return (0);
 	return (1);
 };
@@ -103,16 +103,19 @@ void	PhoneBook::search()
 {
 	std::string	input;
 
-	guideline_print();
 	if (count == 0)
+	{
+		std::cout << "Error : Empty PhoneBook" << std::endl;
 		return ;
+	}
+	guideline_print();
 	for (int i = 0; i < amount; i++)
 		print_arr_line(i);
 	std::cout << "Search Index : ";
 	std::cin >> input;
 	if (!input_valid_check(input.c_str(), amount))
 	{
-		std::cout << "Error : wrong input" << std::endl;
+		std::cout << "Error : Wrong input" << std::endl;
 		return ;
 	}
 	int num = atoi(input.c_str());
