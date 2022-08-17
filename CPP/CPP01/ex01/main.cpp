@@ -2,7 +2,7 @@
 
 int main()
 {
-	Zombie *zombies = zombieHorde(5, "lbi");
+	Zombie *zombies = zombieHorde(5, "zom");
 
 	for (int i = 0; i < 5; i++)
 	{
