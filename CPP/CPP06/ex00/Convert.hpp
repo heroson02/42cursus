@@ -12,6 +12,8 @@ public:
 	Convert(const Convert &obj);
 	Convert& operator=(const Convert &obj);
 	~Convert();
+
+	void	run(const char *str);
 };
 
 #endif

@@ -3,14 +3,14 @@ SRCS =	Zombie.cpp		\
 		randomChump.cpp	\
 		main.cpp
 NAME = Zombie
-CC = clang++
+CXX = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
 OBJS = $(SRCS:.cpp=.o)
 
 all : $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
+	$(CXX) $(FLAGS) $(OBJS) -o $(NAME)
 
 clean:
 	rm -rf $(OBJS)
