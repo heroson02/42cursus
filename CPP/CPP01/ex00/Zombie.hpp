@@ -9,9 +9,7 @@ private:
 public:
 	Zombie(std::string name);
 	~Zombie();
-	Zombie*	newZombie(std::string name);
 	void	announce(void);
-	void	randomChump(std::string name);
 };
 
 Zombie*	newZombie(std::string name);
