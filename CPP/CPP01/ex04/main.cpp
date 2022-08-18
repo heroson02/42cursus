@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	output.open(filename + ".replace");
 	if (output.fail())
 	{
-		std::cout << "Error : can't open file." << std::endl; 
+		std::cout << "Error : can't make file." << std::endl; 
 		return (1);
 	}
 	while (1)
