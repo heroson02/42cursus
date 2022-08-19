@@ -1,4 +1,5 @@
-SRCS =	main.cpp
+SRCS =	main.cpp	\
+		Convert.cpp
 NAME = convert
 CXX = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
