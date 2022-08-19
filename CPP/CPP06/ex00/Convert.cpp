@@ -59,12 +59,30 @@ void Convert::toInt()
 
 void Convert::toFloat()
 {
-	(void)val;
+	std::cout << "float : ";
+	if (std::isnan(val) || std::isinf(val))
+	{
+		std::cout << std::showpos << static_cast<float>(val) << "f" << std::endl;
+		return ;
+	}
+	if (val == static_cast<int>(val))
+		std::cout << std::setprecision(std::numeric_limits<float>::digits10) << val << ".0f" << std::endl;
+	else
+		std::cout << std::setprecision(std::numeric_limits<float>::digits10) << val << "f" << std::endl;
 }
 
 void Convert::toDouble()
 {
-	(void)val;
+	std::cout << "double : ";
+	if (std::isnan(val) || std::isinf(val))
+	{
+		std::cout << std::showpos << static_cast<float>(val)<< std::endl;
+		return ;
+	}
+	if (val == static_cast<int>(val))
+		std::cout << std::setprecision(std::numeric_limits<double>::digits10) << val << ".0" << std::endl;
+	else
+		std::cout << std::setprecision(std::numeric_limits<double>::digits10) << val << std::endl;
 }
 
 
