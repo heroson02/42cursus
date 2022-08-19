@@ -5,6 +5,9 @@ CXX = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
 OBJS = $(SRCS:.cpp=.o)
 
+%.o : %.cpp
+	$(CXX) $(FLAGS) -c $^ -o $@
+
 all : $(NAME)
 
 $(NAME): $(OBJS)
