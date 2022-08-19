@@ -7,8 +7,10 @@
 class Convert
 {
 private:
+	Convert(void);
+	double val;
 public:
-	Convert();
+	Convert(char *str);
 	Convert(const Convert &obj);
 	Convert& operator=(const Convert &obj);
 	~Convert();
