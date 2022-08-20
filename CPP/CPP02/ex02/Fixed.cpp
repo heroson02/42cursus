@@ -43,7 +43,7 @@ Fixed	&Fixed::operator= (const Fixed &a)
 
 float	Fixed::toFloat( void ) const
 {
-	return (float(num) / (1 << fract_bit));
+	return ((float)num / (1 << fract_bit));
 }
 
 int		Fixed::toInt( void ) const
@@ -133,14 +133,14 @@ Fixed	Fixed::operator-- (int)
 }
 Fixed&	Fixed::min(Fixed &a, Fixed &b)
 {
-	if (a < b)
+	if (a.getRawBits() < b.getRawBits())
 		return (a);
 	else
 		return (b);
 }
 Fixed&	Fixed::max(Fixed &a, Fixed &b)
 {
-	if (a > b)
+	if (a.getRawBits() > b.getRawBits())
 		return (a);
 	else
 		return (b);

@@ -50,7 +50,7 @@ Fixed	&Fixed::operator= (const Fixed &a)
 
 float	Fixed::toFloat( void ) const
 {
-	return (float(num) / (1 << fract_bit));
+	return ((float)num / (1 << fract_bit));
 }
 
 int		Fixed::toInt( void ) const
