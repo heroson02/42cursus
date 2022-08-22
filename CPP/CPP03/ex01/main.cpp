@@ -14,20 +14,16 @@ int	main(void)
 	
 	b.attack("a");
 	a.takeDamage(b.getDamage());
+
+	std::cout << std::endl;
+	
+	b.takeDamage(100);
+	b.attack("A");
 	
 	std::cout << std::endl;
 	
-	a.attack("b");
-	b.takeDamage(a.getDamage());
-	
-	std::cout << std::endl;
-	
-	b.attack("a");
-	a.takeDamage(b.getDamage());
-	
-	std::cout << std::endl;
-	
-	b.guardGate(); 
+	b.guardGate();
+	a.guardGate();
 	
 	std::cout << std::endl;
 
