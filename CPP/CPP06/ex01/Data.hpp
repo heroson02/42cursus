@@ -14,6 +14,14 @@ public:
 	Data(const Data &obj);
 	Data& operator=(const Data &obj);
 	~Data();
+
+	std::string getName() const;
+	int 		getAge() const;
+	std::string getHobby() const;
 };
+
+std::ostream& operator<<(std::ostream &out, const Data &obj);
+uintptr_t serialize(Data* ptr);
+Data* deserialize(uintptr_t raw);
 
 #endif

@@ -1,6 +1,6 @@
 SRCS =	main.cpp	\
-		Data.cpp
-NAME = Serialization
+		Base.cpp
+NAME = Base
 CXX = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
 OBJS = $(SRCS:.cpp=.o)
