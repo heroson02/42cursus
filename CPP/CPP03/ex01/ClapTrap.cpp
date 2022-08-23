@@ -89,11 +89,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 		std::cout << "ClapTrap " << name << " has no energy." << std::endl;
 		return ;
 	}
-	if (health + amount > 10)
-		health = 10;
-	else
-		health += amount;
-	
+	health += amount;
 	std::cout << "ClapTrap " << name << " repair himself. " << name << "gets " 
 		<< amount << " hit points."<< std::endl;
 	energy--;
