@@ -5,7 +5,7 @@ FragTrap::FragTrap(void) : ClapTrap()
 	health = 100;
 	energy = 100;
 	damage = 30;
-	std::cout << "FragTrap's default constructor (" << name << ")" << std::endl;
+	std::cout << "New FragTrap created." << std::endl;
 }
 
 FragTrap::FragTrap(std::string _name) : ClapTrap(_name)
@@ -13,7 +13,7 @@ FragTrap::FragTrap(std::string _name) : ClapTrap(_name)
 	health = 100;
 	energy = 100;
 	damage = 30;
-	std::cout << "FragTrap's string constructor (" << name << ")" << std::endl;
+	std::cout << "New FragTrap " << name << " created." << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap &obj) : ClapTrap(obj)
@@ -22,17 +22,29 @@ FragTrap::FragTrap(const FragTrap &obj) : ClapTrap(obj)
 }
 FragTrap& FragTrap::operator=(const FragTrap &obj)
 {
-	ClapTrap::operator=(obj);
-	std::cout << "FragTrap operator = (" << name << ")" << std::endl;
+	name = obj.name;
+	health = obj.getHealth();
+	energy = obj.getEnergy();
+	damage = obj.getDamage();
 	return (*this);
 }
 
 FragTrap::~FragTrap()
 {
-	std::cout << "FragTrap default destructor (" << name << ")" << std::endl;
+	std::cout << "FragTrap eliminated" << std::endl;
 }
 
 void FragTrap::highFivesGuys(void)
 {
+	if (health < 1)
+	{
+		std::cout << "FragTrap " << name << " is already dead." << std::endl;
+		return ;
+	}
+	else if (energy < 1)
+	{
+		std::cout << "FragTrap " << name << " has no energy." << std::endl;
+		return ;
+	}
 	std::cout << "FragTrap " << name << " wants high fives." << std::endl;
 }

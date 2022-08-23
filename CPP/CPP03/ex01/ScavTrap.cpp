@@ -5,7 +5,7 @@ ScavTrap::ScavTrap(void) : ClapTrap()
 	health = 100;
 	energy = 50;
 	damage = 20;
-	std::cout << "ScavTrap default constructor. (" << name << ")" << std::endl;
+	std::cout << "New ScavTrap created." << std::endl;
 }
 
 ScavTrap::ScavTrap(std::string _name): ClapTrap(_name)
@@ -13,12 +13,12 @@ ScavTrap::ScavTrap(std::string _name): ClapTrap(_name)
 	health = 100;
 	energy = 50;
 	damage = 20;
-	std::cout << "ScavTrap string constructor. (" << name << ")" << std::endl;
+	std::cout << "New ScavTrap " << name << " created." << std::endl;
 }
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << "ScavTrap default destructor" << std::endl;
+	std::cout << "ScavTrap eliminated" << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &obj):ClapTrap(obj)
@@ -28,20 +28,43 @@ ScavTrap::ScavTrap(const ScavTrap &obj):ClapTrap(obj)
 
 ScavTrap& ScavTrap::operator= (const ScavTrap &obj)
 {
-	ClapTrap::operator=(obj);
-	std::cout << "ScavTrap operator = (" << name << ")" << std::endl;
+	name = obj.name;
+	health = obj.getHealth();
+	damage = obj.getDamage();
+	energy = obj.getEnergy();
 	return (*this);
 }
 
 void	ScavTrap::attack(const std::string &target)
 {
+	if (health < 1)
+	{
+		std::cout << "ScavTrap " << name << " is already dead." << std::endl;
+		return ;
+	}
+	else if (energy < 1)
+	{
+		std::cout << "ScavTrap " << name << " has no energy." << std::endl;
+		return ;
+	}
 	std::cout << "ScavTrap " << name
 		<< " attacks " << target
 		<< ", causing " << damage 
 		<< " points of damage!" << std::endl;
+	energy--;
 }
 
 void ScavTrap::guardGate(void)
 {
+	if (health < 1)
+	{
+		std::cout << "ScavTrap " << name << " is already dead." << std::endl;
+		return ;
+	}
+	else if (energy < 1)
+	{
+		std::cout << "ScavTrap " << name << " has no energy." << std::endl;
+		return ;
+	}
 	std::cout << "ScavTrap " << name << " is now in Gate keeper mode" << std::endl;
 }

@@ -2,9 +2,18 @@
 
 int main(void)
 {
-	ClapTrap a("Test");
+	ClapTrap a("A");
+	ClapTrap b("B");
 
-	a.attack("hero");
-	a.takeDamage(10);
+	a.attack("B");
+	b.takeDamage(a.getDamage());
+	std::cout << std::endl;
+	b.attack("A");
+	a.takeDamage(b.getDamage());
+	std::cout << std::endl;
 	a.beRepaired(2);
+	b.beRepaired(5);
+	std::cout << std::endl;
+	a.takeDamage(10);
+	a.beRepaired(1);
 }

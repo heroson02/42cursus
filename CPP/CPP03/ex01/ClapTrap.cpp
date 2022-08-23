@@ -25,6 +25,7 @@ ClapTrap::ClapTrap(std::string _name)
 
 ClapTrap::ClapTrap(const ClapTrap &obj)
 {
+	std::cout << "ClapTrap's copy constructor (" << name << ")" << std::endl;
 	*this = obj;
 }
 
@@ -74,7 +75,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 		<< " points of damage!" << std::endl;
 	health -= amount;
 	std::cout << "ClapTrap " << name << " has "
-	<< health << "hit point." << std::endl;
+	<< health << " hit point." << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
@@ -92,10 +93,22 @@ void ClapTrap::beRepaired(unsigned int amount)
 	health += amount;
 	std::cout << "ClapTrap " << name << " repair himself. " << name << "gets " 
 		<< amount << " hit points."<< std::endl;
+	std::cout << "ClapTrap " << name << " has "
+		<< health << " hit point." << std::endl;
 	energy--;
 }
 
-int ClapTrap::getDamage()
+unsigned int ClapTrap::getDamage() const
 {
 	return (damage);
+}
+
+unsigned int ClapTrap::getHealth() const
+{
+	return (health);
+}
+
+unsigned int ClapTrap::getEnergy() const
+{
+	return (energy);
 }
