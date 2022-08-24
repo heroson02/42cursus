@@ -32,6 +32,9 @@ void test_wrong(void) {
 
 int main()
 {
+  std::cout << "======= Proper Class Test ====" << std::endl;
 	test_animal();
-	// test_wrong();
+  std::cout << std::endl << std::endl;
+  std::cout << "======= Wrong Class Test =====" << std::endl;
+	test_wrong();
 }
