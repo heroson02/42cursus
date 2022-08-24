@@ -1,23 +1,47 @@
 #include "Cat.hpp"
 #include "Dog.hpp"
 
-int main()
-{
-	const Animal* j = new Dog(); 
-	const Animal* i = new Cat();
-	
-	Dog *a;
-	Cat *b;
+void test_normal(void) {
+  const Animal* i = new Cat();
+  const Animal* j = new Dog();
 
-	a = new Dog();
-	b = new Cat();
-	a->getBrain()->printBrain();
-	delete j;//should not create a leak
-	delete i;
-	delete a;
-	delete b;
-	while(1)
-		;
-	return 0;
+  std::cout << std::endl;
+  i->makeSound();
+  j->makeSound();
+  std::cout << std::endl;
+
+  delete j;
+  delete i;
 }
 
+void test_array()
+{
+	Animal* arr[10];
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (i % 2 == 0)
+		{
+			arr[i] = new Cat();
+		}
+		else if (i % 2 == 1)
+		{
+			arr[i] = new Dog();
+		}
+	}
+
+	std::cout << std::endl;
+	Dog *testDog = dynamic_cast<Dog*>(arr[1]);
+	std::cout << "====== Dog's brain idea =====" << std::endl << std::endl;
+	testDog->getBrain()->printBrain();
+	std::cout << std::endl;
+
+	for (int i = 0; i < 10; i++)
+		delete arr[i];
+}
+
+int main()
+{
+	test_normal();
+	test_array();
+}

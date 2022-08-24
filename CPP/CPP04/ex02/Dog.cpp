@@ -20,8 +20,8 @@ Dog& Dog::operator= (const Dog &obj)
 
 Dog::~Dog()
 {
-	delete brain;
 	std::cout << "Dog destructor called." << std::endl;
+	delete brain;
 }
 
 void	Dog::makeSound() const
