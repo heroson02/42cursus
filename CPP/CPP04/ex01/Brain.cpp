@@ -39,6 +39,11 @@ std::string Brain::getIdea(int i) const
 	return (ideas[i]);
 }
 
+void Brain::setIdea(int i, std::string data)
+{
+	ideas[i] = data;
+}
+
 void	Brain::printBrain()
 {
 	for (int i = 0; i < 100; i++)

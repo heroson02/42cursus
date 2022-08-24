@@ -14,7 +14,11 @@ Cat::Cat(const Cat &obj)
 
 Cat& Cat::operator= (const Cat &obj)
 {
-	Animal::operator=(obj);
+	if (this != &obj)
+	{
+		type = obj.getType();
+		brain = obj.getBrain();
+	}
 	return (*this);
 }
 

@@ -1,17 +1,25 @@
 #include "Cat.hpp"
 #include "Dog.hpp"
 
-void test_normal(void) {
-  const Animal* i = new Cat();
-  const Animal* j = new Dog();
+void test_normal(void)
+{
+	const Animal* i = new Cat();
+  	const Animal* j = new Dog();
 
-  std::cout << std::endl;
-  i->makeSound();
-  j->makeSound();
-  std::cout << std::endl;
+	const Animal* c = i;
+  	std::cout << std::endl;
+  	i->makeSound();
+  	j->makeSound();
 
-  delete j;
-  delete i;
+	const Cat* i_cat = dynamic_cast<const Cat*>(i);
+	const Cat* c_cat = dynamic_cast<const Cat*>(c);
+
+	std::cout << "i cat idea : " << i_cat->getBrain()->getIdea(5) << std::endl;
+	i_cat->getBrain()->setIdea(5, "hello");
+	std::cout << "i cat idea : " << i_cat->getBrain()->getIdea(5) << std::endl;
+	std::cout << "c cat idea : " << c_cat->getBrain()->getIdea(5) << std::endl;
+
+  	std::cout << std::endl;
 }
 
 void test_array()
@@ -43,5 +51,5 @@ void test_array()
 int main()
 {
 	test_normal();
-	test_array();
+	// test_array();
 }

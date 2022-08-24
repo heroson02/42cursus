@@ -13,6 +13,7 @@ public:
 	Brain& operator= (const Brain &obj);
 	~Brain();
 	std::string getIdea(int i)	const;
+	void setIdea(int i, std::string data);
 	void	printBrain();
 };
 
