@@ -8,12 +8,13 @@ Dog::Dog(void) : Animal()
 
 Dog::Dog(const Dog &obj)
 {
+	std::cout << "Dog copy constructor called." << std::endl;
 	*this = obj;
 }
 
 Dog& Dog::operator= (const Dog &obj)
 {
-	Animal::operator=(obj);
+	type = obj.getType();
 	return (*this);
 }
 

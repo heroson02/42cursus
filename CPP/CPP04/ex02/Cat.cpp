@@ -10,12 +10,15 @@ Cat::Cat(void) : Animal()
 Cat::Cat(const Cat &obj)
 {
 	std::cout << "Cat copy constructor called." << std::endl;
-	*this = obj;
+	type = obj.getType();
+	brain = new Brain(*obj.getBrain());
 }
 
 Cat& Cat::operator= (const Cat &obj)
 {
 	type = obj.getType();
+	if (brain)
+		delete brain;
 	brain = new Brain(*obj.getBrain());
 	return (*this);
 }

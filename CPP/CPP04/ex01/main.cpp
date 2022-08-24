@@ -44,17 +44,18 @@ void test_array()
 	}
 
 	std::cout << std::endl;
-	Dog testDog = *(dynamic_cast<Dog*>(arr[1]));
+	Dog *test = new Dog((*dynamic_cast<Dog *>(arr[1])));
 	std::cout << "====== Dog's brain idea =====" << std::endl << std::endl;
-	testDog.getBrain()->printBrain();
 	std::cout << std::endl;
-
+	test->getBrain()->printBrain();
 	for (int i = 0; i < 10; i++)
 		delete arr[i];
+	delete test;
 }
 
 int main()
 {
 	test_normal();
 	test_array();
+	system("leaks Animals");
 }
