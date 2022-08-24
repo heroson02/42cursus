@@ -91,7 +91,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 		return ;
 	}
 	health += amount;
-	std::cout << "ClapTrap " << name << " repair himself. " << name << "gets " 
+	std::cout << "ClapTrap " << name << " repair himself. " << name << " gets " 
 		<< amount << " hit points."<< std::endl;
 	std::cout << "ClapTrap " << name << " has "
 		<< health << " hit point." << std::endl;

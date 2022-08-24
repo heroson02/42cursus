@@ -13,7 +13,7 @@ protected:
 public:
 	ClapTrap(void);
 	ClapTrap(std::string name);
-	~ClapTrap();
+	virtual ~ClapTrap();
 	ClapTrap(const ClapTrap &obj);
 	ClapTrap& operator= (const ClapTrap &obj);
 	virtual void attack(const std::string& target);
