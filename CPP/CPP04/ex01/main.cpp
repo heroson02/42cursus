@@ -3,23 +3,28 @@
 
 void test_normal(void)
 {
+	const Animal* j = new Dog();
 	const Animal* i = new Cat();
-  	const Animal* j = new Dog();
 
-	const Animal* c = i;
-  	std::cout << std::endl;
-  	i->makeSound();
-  	j->makeSound();
+	delete j;
+	delete i;
 
-	const Cat* i_cat = dynamic_cast<const Cat*>(i);
-	const Cat* c_cat = dynamic_cast<const Cat*>(c);
+	Dog a;
+	Dog b;
+	Dog c(a);
 
-	std::cout << "i cat idea : " << i_cat->getBrain()->getIdea(5) << std::endl;
-	i_cat->getBrain()->setIdea(5, "hello");
-	std::cout << "i cat idea : " << i_cat->getBrain()->getIdea(5) << std::endl;
-	std::cout << "c cat idea : " << c_cat->getBrain()->getIdea(5) << std::endl;
-
-  	std::cout << std::endl;
+	b = a;
+	std::cout << "====== Deep copy check =======" << std::endl;
+	std::cout << "Dog <a> idea[5] : " << a.getBrain()->getIdea(5) << std::endl;
+	std::cout << "Dog <b> idea[5] : " << b.getBrain()->getIdea(5) << std::endl;
+	std::cout << "Dog <c> idea[5] : " << c.getBrain()->getIdea(5) << std::endl << std::endl;
+	a.getBrain()->setIdea(5, "changedData A");
+	b.getBrain()->setIdea(5, "changedData B");
+	c.getBrain()->setIdea(5, "changedData C");
+	std::cout << "Dog <a> idea[5] : " << a.getBrain()->getIdea(5) << std::endl;
+	std::cout << "Dog <b> idea[5] : " << b.getBrain()->getIdea(5) << std::endl;
+	std::cout << "Dog <c> idea[5] : " << c.getBrain()->getIdea(5) << std::endl;
+	std::cout << "==============================" << std::endl;
 }
 
 void test_array()
@@ -39,9 +44,9 @@ void test_array()
 	}
 
 	std::cout << std::endl;
-	Dog *testDog = dynamic_cast<Dog*>(arr[1]);
+	Dog testDog = *(dynamic_cast<Dog*>(arr[1]));
 	std::cout << "====== Dog's brain idea =====" << std::endl << std::endl;
-	testDog->getBrain()->printBrain();
+	testDog.getBrain()->printBrain();
 	std::cout << std::endl;
 
 	for (int i = 0; i < 10; i++)
@@ -51,5 +56,5 @@ void test_array()
 int main()
 {
 	test_normal();
-	// test_array();
+	test_array();
 }

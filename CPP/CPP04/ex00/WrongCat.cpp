@@ -8,6 +8,7 @@ WrongCat::WrongCat(void) : WrongAnimal()
 
 WrongCat::WrongCat(const WrongCat &obj)
 {
+	std::cout << "WrongCat copy constructor called." << std::endl;
 	*this = obj;
 }
 

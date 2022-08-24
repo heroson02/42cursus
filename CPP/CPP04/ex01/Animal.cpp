@@ -8,13 +8,13 @@ Animal::Animal(void)
 
 Animal::Animal(const Animal &obj)
 {
-	*this = obj;
 	std::cout << "Animal copy constructor called." << std::endl;
+	*this = obj;
 }
 
 Animal& Animal::operator= (const Animal &obj)
 {
-	type = obj.type;
+	type = obj.getType();
 	return (*this);
 }
 
