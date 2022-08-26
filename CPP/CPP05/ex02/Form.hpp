@@ -41,6 +41,11 @@ public:
 		public:
 			const char *what(void) const throw();
 	};
+	class NotSigned : public std::exception
+	{
+		public:
+			const char *what(void) const throw();
+	};
 };
 
 std::ostream &operator<<(std::ostream &out, Form &val);

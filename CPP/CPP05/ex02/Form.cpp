@@ -65,6 +65,8 @@ void	Form::beSigned(Bureaucrat &obj)
 
 void Form::isExecutable(const Bureaucrat &obj) const
 {
+	if (isSign == false)
+		throw NotSigned();
 	if (obj.getGrade() > execGrade)
 		throw GradeTooLowException();
 }
@@ -79,9 +81,15 @@ const char *Form::GradeTooLowException::what(void) const throw()
 	return ("GradeTooLowException");
 }
 
+const char *Form::NotSigned::what(void) const throw()
+{
+	return ("FormNotSigned");
+}
+
 std::ostream &operator<<(std::ostream &out, Form &val)
 {
 	out << val.getName() << ", grade to sign " << val.getSignGrade()
-		<< ", grade to execute " << val.getExecGrade() << std::endl;
+		<< ", grade to execute " << val.getExecGrade() << ", sign : " << val.getSign()
+		<< std::endl;
 	return (out);
 }

@@ -6,11 +6,10 @@ int main()
     Form* toHigh;
     Form* toLow;
     
-    std::cout << *constitution;
-    
+    std::cout << *constitution << std::endl;
     try
     {
-       toHigh = new Form("ToHigh", 0, 20);
+       toHigh = new Form("toHigh", 0, 20);
     }
     catch(std::exception & e)
     {
@@ -19,13 +18,13 @@ int main()
 
     try
     {
-       toLow = new Form("ToHigh", 10, 199);
+       toLow = new Form("ToLow", 10, 199);
     }
     catch(std::exception & e)
     {
         std::cerr << e.what() << std::endl;
     }
-
+    std::cout << std::endl;
     Bureaucrat* bob = new Bureaucrat("Bob", 5);
     
     std::cout << *bob;
@@ -35,14 +34,14 @@ int main()
     std::cout << *constitution;
 
     bob->signForm(*constitution);
-
+    std::cout << std::endl;
     Form* nop = new Form("Constitution", 1, 1);
-    Bureaucrat* nopper = new Bureaucrat("Nopper", 12);
+    Bureaucrat* john = new Bureaucrat("John", 12);
 
-    nopper->signForm(*nop);
+    john->signForm(*nop);
     
     delete constitution;
     delete bob;
     delete nop;
-    delete nopper;
+    delete john;
 }

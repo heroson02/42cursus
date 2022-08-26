@@ -16,9 +16,11 @@ int main()
 
 	(void)first;
 	std::cout << "target form : " << second->getName() << std::endl;
+	a.signForm(*second);
 	a.executeForm(*second);
 	std::cout << std::endl;
 
 	std::cout << "target form : " << third->getName() << std::endl;
+	b.signForm(*third);
 	b.executeForm(*third);
 }

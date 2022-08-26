@@ -4,6 +4,7 @@
 #define R_SIGN 75
 #define R_EXEC 45
 #include "Form.hpp"
+#include <ctime>
 
 class RobotomyRequestForm : public Form
 {

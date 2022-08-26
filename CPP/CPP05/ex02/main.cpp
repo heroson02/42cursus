@@ -4,28 +4,28 @@
 
 static void testForm(Bureaucrat* bur, Form* form)
 {
-    std::cout << std::endl << "Sign & Execute \033[33m" << form->getName() << "\033[0m : " << std::endl;
+    std::cout << std::endl << "Sign & Execute <" << form->getName() << ">" << std::endl;
     bur->signForm(*form);
     bur->executeForm(*form);
 }
 
 int main()
 {
-    ShrubberyCreationForm* shrub = new ShrubberyCreationForm("Patrick");
-    RobotomyRequestForm* robot = new RobotomyRequestForm("Bob");
-    PresidentialPardonForm* pardon = new PresidentialPardonForm("Pef");
+    ShrubberyCreationForm* shrub = new ShrubberyCreationForm("Shrub");
+    RobotomyRequestForm* robot = new RobotomyRequestForm("Robotomy");
+    PresidentialPardonForm* pardon = new PresidentialPardonForm("Pardon");
 
     Bureaucrat* bob = new Bureaucrat("Bob", 120);
     Bureaucrat* james = new Bureaucrat("James", 33);
-    Bureaucrat* meg = new Bureaucrat("Meg", 1);
+    Bureaucrat* son = new Bureaucrat("Son", 1);
 
-    std::cout << "\033[31mNormal\033[0m tests : " << std::endl;
+    std::cout << "====== NORMAL TEST ======" << std::endl;
 
     testForm(bob, shrub);
     testForm(james, robot);
-    testForm(meg, pardon);
+    testForm(son, pardon);
 
-    std::cout << std::endl << "\033[31mAlreadySigned & ToLow\033[0m tests : " << std::endl;
+    std::cout << std::endl << "===== SIGNED FORM TEST ======" << std::endl;
 
     testForm(bob, pardon);
 
@@ -35,7 +35,7 @@ int main()
 
     delete bob;
     delete james;
-    delete meg;
+    delete son;
 
     return (0);
 }
