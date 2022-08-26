@@ -35,6 +35,7 @@ int main()
     try
     {
         toHigh = new Bureaucrat("ToHigh", 0);
+		(void)toHigh;
     }
     catch (std::exception & e)
     {
@@ -44,6 +45,7 @@ int main()
     try
     {
         toLow = new Bureaucrat("ToLow", 420);
+		(void)toLow;
     }
     catch (std::exception & e)
     {
