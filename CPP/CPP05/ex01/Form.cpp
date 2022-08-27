@@ -22,10 +22,6 @@ Form::Form(const Form &obj) : name(obj.getName()), signGrade(obj.getSignGrade())
 
 Form& Form::operator= (const Form &obj)
 {
-	if (obj.signGrade > 150 || obj.execGrade > 150)
-		throw GradeTooLowException();
-	else if (obj.signGrade < 1 || obj.execGrade < 1)
-		throw GradeTooHighException();
 	isSign = obj.isSign;
 	return (*this);
 }
