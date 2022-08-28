@@ -7,6 +7,8 @@ Convert::Convert(char *str) : error(false), val(0)
 	char *ptr = NULL;
 	
 	val = strtod(str, &ptr);
+	if (val == 0 && (str[0] != '+' && str[0] != '-' && !std::isdigit(str[0])))
+		error = true;
 	if (*ptr && strcmp(ptr, "f"))
 		error = true;
 }
