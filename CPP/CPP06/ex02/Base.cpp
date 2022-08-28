@@ -12,13 +12,13 @@ Base *generate(void)
 	switch (i)
 	{
 	case 0:
-		return (dynamic_cast<Base *>(new A()));
+		return (new A());
 		break;
 	case 1:
-		return (dynamic_cast<Base *>(new B()));
+		return (new B());
 		break;
 	case 2:
-		return (dynamic_cast<Base *>(new C()));
+		return (new C());
 		break;
 	default:
 		break;
