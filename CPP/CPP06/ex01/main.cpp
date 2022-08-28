@@ -2,7 +2,7 @@
 
 int main()
 {
-	Data a("yson", 00, "coding");
+	Data a("Bob", 20, "reading books");
 
 	std::cout << a << std::endl;
 

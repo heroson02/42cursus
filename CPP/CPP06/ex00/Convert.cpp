@@ -13,10 +13,7 @@ Convert::Convert(char *str) : error(false), val(0)
 
 Convert::Convert(const Convert &obj)
 {
-	if (this != &obj)
-	{
-		*this = obj;
-	}
+	*this = obj;
 }
 
 Convert& Convert::operator=(const Convert &obj)
@@ -29,7 +26,27 @@ Convert& Convert::operator=(const Convert &obj)
 Convert::~Convert()
 {}
 
-void Convert::toChar()
+char	Convert::toChar()
+{
+	return static_cast<char>(val);
+}
+
+int	Convert::toInt()
+{
+	return static_cast<int>(val);
+}
+
+float	Convert::toFloat()
+{
+	return static_cast<float>(val);
+}
+
+double	Convert::toDouble()
+{
+	return static_cast<double>(val);
+}
+
+void Convert::printChar()
 {
 	std::cout << "char : ";
 	if (std::isnan(val) || std::isinf(val))
@@ -37,7 +54,7 @@ void Convert::toChar()
 		std::cout << "impossible" << std::endl;
 		return ;
 	}
-	char b = static_cast<char>(val);
+	char b = toChar();
 	if (isprint(b))
 	{
 		std::cout << "'" << b << "'" << std::endl;
@@ -48,41 +65,41 @@ void Convert::toChar()
 	}
 }
 
-void Convert::toInt()
+void Convert::printInt()
 {
 	std::cout << "int : ";
 	if (std::isnan(val) || std::isinf(val))
 		std::cout << "impossible" << std::endl;
 	else
-		std::cout << static_cast<int>(val) << std::endl;
+		std::cout << toInt() << std::endl;
 }
 
-void Convert::toFloat()
+void Convert::printFloat()
 {
 	std::cout << "float : ";
 	if (std::isnan(val) || std::isinf(val))
 	{
-		std::cout << std::showpos << static_cast<float>(val) << "f" << std::endl;
+		std::cout << std::showpos << toFloat() << "f" << std::endl;
 		return ;
 	}
-	if (val == static_cast<int>(val))
-		std::cout << std::setprecision(std::numeric_limits<float>::digits10) << val << ".0f" << std::endl;
+	if (toFloat() == static_cast<int64_t>(toFloat()))
+		std::cout << toFloat() << ".0f" << std::endl;
 	else
-		std::cout << std::setprecision(std::numeric_limits<float>::digits10) << val << "f" << std::endl;
+		std::cout << std::setprecision(std::numeric_limits<float>::digits10) << toFloat() << "f" << std::endl;
 }
 
-void Convert::toDouble()
+void Convert::printDouble()
 {
 	std::cout << "double : ";
 	if (std::isnan(val) || std::isinf(val))
 	{
-		std::cout << std::showpos << static_cast<float>(val)<< std::endl;
+		std::cout << std::showpos << toDouble() << std::endl;
 		return ;
 	}
-	if (val == static_cast<int>(val))
-		std::cout << std::setprecision(std::numeric_limits<double>::digits10) << val << ".0" << std::endl;
+	if (toDouble() == static_cast<int64_t>(toDouble()))
+		std::cout << toDouble() << ".0" << std::endl;
 	else
-		std::cout << std::setprecision(std::numeric_limits<double>::digits10) << val << std::endl;
+		std::cout << std::setprecision(std::numeric_limits<double>::digits10) << toDouble() << std::endl;
 }
 
 
@@ -93,8 +110,8 @@ void	Convert::convert_print()
 		std::cout << "Convert error" << std::endl;
 		return ;
 	}
-	toChar();
-	toInt();
-	toFloat();
-	toDouble();
+	printChar();
+	printInt();
+	printFloat();
+	printDouble();
 }

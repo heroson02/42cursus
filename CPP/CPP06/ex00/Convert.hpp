@@ -18,12 +18,16 @@ public:
 	Convert& operator=(const Convert &obj);
 	~Convert();
 
-	void	run(const char *str);
 	void	convert_print();
-	void	toChar();
-	void	toInt();
-	void	toFloat();
-	void	toDouble();
+	void	printChar();
+	void	printInt();
+	void	printFloat();
+	void	printDouble();
+
+	char	toChar();
+	int	toInt();
+	float	toFloat();
+	double	toDouble();
 };
 
 #endif
