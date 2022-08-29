@@ -14,7 +14,7 @@ public:
 	Array()
 	{
 		_size = 0;
-		arr = 0;
+		arr = new T[0];
 	};
 
 	Array(unsigned int n)

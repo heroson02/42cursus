@@ -1,15 +1,4 @@
-#include <iostream>
 #include "iter.hpp"
-
-void	intTest(int a)
-{
-	std::cout << "Number : " << a << std::endl;
-}
-
-void	stringTest(std::string a)
-{
-	std::cout << "String : " << a << std::endl;
-}
 
 int main()
 {
@@ -17,8 +6,8 @@ int main()
 	std::string strArr[] = {"hello", "my", "name", "is", "yson"};
 
 	std::cout << "====== INT TEST ======" << std::endl;
-	iter(intArr, 6, intTest);
+	iter(intArr, 6, templatePrint);
 	std::cout << std::endl << std::endl;
 	std::cout << "====== STRING TEST ======" << std::endl;
-	iter(strArr, 5, stringTest);
+	iter(strArr, 5, templatePrint);
 }
