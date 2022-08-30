@@ -1,9 +1,9 @@
 #include "easyfind.hpp"
-#include <vector>
+#include <list>
 
 int main()
 {
-    std::vector<int> a;
+    std::list<int> a;
 
     a.push_back(10);
     a.push_back(25);

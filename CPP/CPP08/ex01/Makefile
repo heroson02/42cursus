@@ -1,4 +1,5 @@
-SRCS =	main.cpp
+SRCS =	main.cpp	\
+		Span.cpp
 NAME = a.out
 CXX = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
