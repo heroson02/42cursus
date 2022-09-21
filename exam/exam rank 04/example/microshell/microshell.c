@@ -4,6 +4,12 @@
 #include <sys/wait.h>
 #include <string.h>
 
+#ifdef TEST_SH
+# define TEST		1
+#else
+# define TEST		0
+#endif
+
 typedef struct s_list
 {
     int     pipe[2];
@@ -72,7 +78,7 @@ t_list *ft_lstnew()
 
 t_list *ft_lstlast(t_list *lst)
 {
-    if (lst && lst->next)
+    while (lst && lst->next)
         lst = lst->next;
     return (lst);
 }
@@ -187,9 +193,9 @@ int exec_cmd(t_list *lst, char **envp)
         fatal_error();
     if (pid == 0)
     {
-        if (lst->write_pipe && (dup2(lst->pipe[1], 1) < 0))
+        if (lst->write_pipe && dup2(lst->pipe[1], 1) < 0)
             fatal_error();
-        else if (lst->read_pipe && (dup2(lst->prev->pipe[0], 0) < 0))
+        else if (lst->read_pipe && dup2(lst->prev->pipe[0], 0) < 0)
             fatal_error();
         if ((ret = execve(lst->argv[0], lst->argv, envp)))
         {
@@ -202,9 +208,9 @@ int exec_cmd(t_list *lst, char **envp)
     else
     {
         waitpid(pid, &status, 0);
-        if (lst->write_pipe && (close(lst->pipe[1]) < 0))
+        if (lst->write_pipe && close(lst->pipe[1]) < 0)
             fatal_error();
-        else if (lst->read_pipe && (close(lst->prev->pipe[0]) < 0))
+        else if (lst->read_pipe && close(lst->prev->pipe[0]) < 0)
             fatal_error();
         if (WIFEXITED(status))
             return (WEXITSTATUS(status));
@@ -248,8 +254,7 @@ int main(int argc, char **argv, char **envp)
         ret = execute(result, envp);
         ft_lstclear(result);
     }
-#ifdef TEST_SH
-	while (1);
-#endif
-	return (ret);
+	if (TEST)
+		while (1);
+    return (ret);
 }

@@ -261,9 +261,9 @@ int					main(int argc, char **argv, char **envp)
 	(void)envp;
 	while ((cmd_list = parser_build(argc, argv)))
 	{
-		print_all(cmd_list->argv);
-		// ret = execute(cmd_list, envp);
-		// lst_clear(cmd_list);
+		// print_all(cmd_list->argv);
+		ret = execute(cmd_list, envp);
+		lst_clear(cmd_list);
 	}
 #ifdef TEST_SH
 	while (1);
