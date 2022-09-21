@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <string.h>
-#include <stddef.h>
+// #include <stddef.h>
 
 
 typedef	struct		s_list
@@ -182,7 +182,7 @@ int					builtin_cd(t_list *cmd)
 		ft_putstr_fd(STDERR_FILENO, "error: cd: bad arguments\n");
 		return (1);
 	}
-	else if (chdir(cmd->argv[1]))
+	else if (chdir(cmd->argv[1]))	//chdir은 에러 시 -1을 반환한다.
 	{
 		ft_putstr_fd(STDERR_FILENO, "error: cd: cannot change directory to ");
 		ft_putstr_fd(STDERR_FILENO, cmd->argv[1]);
@@ -223,7 +223,7 @@ int					exec_cmd(t_list *cmd, char **envp)
 			exit_fatal();
 		else if (cmd->read_pipe && close(cmd->prev->pipe[FD_READ]) < 0)
 			exit_fatal();
-		if (WIFEXITED(stat_loc))
+		if (WIFEXITED(stat_loc)) //WIFEXITED : 자식 프로세서가 정상 종료 시 non-zero값 반환.
 			return (WEXITSTATUS(stat_loc));
 		return (EXIT_FAILURE);
 	}
@@ -244,15 +244,26 @@ int					execute(t_list *cmd_list, char **envp)
 	return (ret);
 }
 
+#include <stdio.h>
+void print_all(char **str)
+{
+    for (int i = 0; str[i]; i++)
+    {
+        printf("%s\n", str[i]);
+    }
+}
 int					main(int argc, char **argv, char **envp)
 {
 	t_list		*cmd_list;
-	int			ret;
+	int			ret = 0;
 
+	(void)ret;
+	(void)envp;
 	while ((cmd_list = parser_build(argc, argv)))
 	{
-		ret = execute(cmd_list, envp);
-		lst_clear(cmd_list);
+		print_all(cmd_list->argv);
+		// ret = execute(cmd_list, envp);
+		// lst_clear(cmd_list);
 	}
 #ifdef TEST_SH
 	while (1);
