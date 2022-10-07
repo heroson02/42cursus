@@ -6,4 +6,4 @@ COPY tools/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 COPY tools/data.sql /data.sql
 RUN service mysql start && mysql < data.sql
 
-# RUN mysqld_safe
+CMD /usr/bin/mysqld_safe
