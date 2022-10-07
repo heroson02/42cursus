@@ -1,0 +1,23 @@
+version: '3.0'
+
+services:
+    mariadb:
+      container_name: mariadb
+      image: mariadb
+      build: ./requirements/mariadb
+      restart: always
+
+    wordpress:
+      container_name: wordpress
+      image: wordpress
+      build: ./requirements/wordpress
+      restart: always
+
+    nginx:
+      container_name: nginx
+      image: nginx
+      build: ./requirements/nginx
+      ports: 
+        - "443:443"
+      restart: always #When container shut down, restarts automatically.
+      
