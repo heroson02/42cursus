@@ -1,13 +1,15 @@
 version: '3'
 
 volumes:
-    mariadb_volume:
+    db_vol:
+      name: db_vol
       driver: local
       driver_opts:
         type: none
         o: bind
         device: /home/username/data/mariadb
-    wordpress_volume:
+    wp_vol:
+      name: wp_vol
       driver: local
       driver_opts:
         type: none
@@ -26,21 +28,25 @@ services:
         - inception
 
     wordpress:
+      depends_on:
+        - mariadb
       container_name: wordpress
       image: wordpress
       build: ./requirements/wordpress
       volumes:
-        - wordpress_volume:/var/www/wordpress
+        - wp_vol:/var/www/wordpress
       restart: always
       networks:
         - inception
 
     nginx:
+      depends_on:
+        - wordpress
       container_name: nginx
       image: nginx
       build: ./requirements/nginx
       volumes:
-        - wordpress_volume:/var/www/wordpress
+        - wp_vol:/var/www/wordpress
       ports: 
         - "443:443"
       networks:
