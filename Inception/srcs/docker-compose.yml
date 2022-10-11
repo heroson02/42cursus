@@ -11,15 +11,34 @@ services:
       container_name: wordpress
       image: wordpress
       build: ./requirements/wordpress
+      volumes:
+        - wordpress_volume: /var/www/wordpress
       restart: always
 
     nginx:
       container_name: nginx
       image: nginx
       build: ./requirements/nginx
+      volumes:
+        - wordpress_volume: /var/www/wordpress
       ports: 
         - "443:443"
       restart: always #When container shut down, restarts automatically.
-
+volumes:
+    mariadb_volume:
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /home/yson/data/mariadb
+    wordpress_volume:
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /home/yson/data/wordpress
+networks:
+  inception:
+    driver: bridge
 #수정 해야 할 부분 : /var/www/html/로 연결되는 부분을 /var/www/wordpress로 바꾸었을 때,
 # (wordpress 도커파일 내의 압축 풀고 옮기기가 가능한지 확인하기) 만약 된다면 /var/www/wordpress로 변환하기. (nginx.conf든 어디든.)
