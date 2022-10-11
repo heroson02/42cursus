@@ -22,6 +22,8 @@ services:
       image: mariadb
       build: ./requirements/mariadb
       restart: always
+      networks:
+        - intra
 
     wordpress:
       container_name: wordpress
@@ -30,6 +32,8 @@ services:
       volumes:
         - wordpress_volume:/var/www/wordpress
       restart: always
+      networks:
+        - intra
 
     nginx:
       container_name: nginx
@@ -39,4 +43,6 @@ services:
         - wordpress_volume:/var/www/wordpress
       ports: 
         - "443:443"
+      networks:
+        - intra
       restart: always #When container shut down, restarts automatically.
