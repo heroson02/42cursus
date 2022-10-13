@@ -5,18 +5,19 @@ volumes:
       name: db_vol
       driver: local
       driver_opts:
-        type: none
+        type: volume
         o: bind
         device: /home/yson/data/mariadb
     wp_vol:
       name: wp_vol
       driver: local
       driver_opts:
-        type: none
+        type: volume
         o: bind
         device: /home/yson/data/wordpress
 networks:
   inception:
+    name : inception
     driver: bridge
 services:
     mariadb:
@@ -24,6 +25,8 @@ services:
       image: mariadb
       build: ./requirements/mariadb
       restart: always
+      volumes:
+        - db_vol:/var/lib/mysql
       networks:
         - inception
 
