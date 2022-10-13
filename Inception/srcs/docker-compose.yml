@@ -16,9 +16,9 @@ volumes:
         o: bind
         device: /home/yson/data/wordpress
 networks:
-  inception:
-    name : inception
-    driver: bridge
+    inception:
+      name : inception
+      driver: bridge
 services:
     mariadb:
       container_name: mariadb
@@ -54,4 +54,4 @@ services:
         - "443:443"
       networks:
         - inception
-      restart: always #When container shut down, restarts automatically.
+      restart: always
