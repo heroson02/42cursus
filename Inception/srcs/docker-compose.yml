@@ -7,14 +7,14 @@ volumes:
       driver_opts:
         type: none
         o: bind
-        device: /home/username/data/mariadb
+        device: /home/yson/data/mariadb
     wp_vol:
       name: wp_vol
       driver: local
       driver_opts:
         type: none
         o: bind
-        device: /home/username/data/wordpress
+        device: /home/yson/data/wordpress
 networks:
   inception:
     driver: bridge
