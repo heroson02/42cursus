@@ -15,4 +15,4 @@ COPY /tools/wp-config.php /var/www/wordpress/wp-config.php
 RUN rm /etc/php/7.3/fpm/pool.d/www.conf
 COPY /conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
-RUN service php7.3-fpm start
+CMD ./usr/sbin/php-fpm7.3 --nodaemonize

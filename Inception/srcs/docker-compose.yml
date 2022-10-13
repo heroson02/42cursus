@@ -8,6 +8,7 @@ volumes:
         type: volume
         o: bind
         device: /home/yson/data/mariadb
+        # device: /Users/yson/data/mariadb
     wp_vol:
       name: wp_vol
       driver: local
@@ -15,6 +16,7 @@ volumes:
         type: volume
         o: bind
         device: /home/yson/data/wordpress
+        # device: /Users/yson/data/wordpress
 networks:
     inception:
       name : inception
