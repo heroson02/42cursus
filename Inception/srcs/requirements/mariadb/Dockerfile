@@ -8,4 +8,5 @@ EXPOSE 3306
 COPY tools/data.sql /data.sql
 RUN service mysql start && mysql < data.sql
 
+RUN cd /run && mkdir php && chown mysql php && chgrp mysql php
 CMD /usr/bin/mysqld_safe
