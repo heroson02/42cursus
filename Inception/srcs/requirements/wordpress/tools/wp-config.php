@@ -17,6 +17,8 @@ define( 'DB_CHARSET', 'utf8' );
 /** The database collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
 
+define( 'WP_ALLOW_REPAIR', true );
+
 define('AUTH_KEY',         'HKdHY4>7 E.eEpu0$@fy#kj<X*H9h)@xg+ck~|`:({u}k||Ko&-=ar/b#NH/F+?-');
 define('SECURE_AUTH_KEY',  'rEBOT^ K1Y8mguv,]{,|T^BDQ4-z{XlQ?C(ub,T-?186*L%^/|-5yd):]88Ffbk}');
 define('LOGGED_IN_KEY',    ')RZT;!,A42@vW#jNs+:I>+F }R,Msba5P>JnWS:XuCf.yM<o})/xd<4qMzt-D|v.');
@@ -28,7 +30,7 @@ define('NONCE_SALT',       '`UG.URn6G-@l3k=w&4OgN>>Ar+%RX<gvV-S?FX373=s9T*ii Tb^
 
 $table_prefix = 'wp_';
 
-define( 'WP_DEBUG', false );
+define( 'WP_DEBUG', true );
 
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
