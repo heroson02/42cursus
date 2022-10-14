@@ -12,7 +12,7 @@ RUN wget https://wordpress.org/latest.tar.gz && \
 RUN rm /var/www/wordpress/wp-config-sample.php
 COPY /tools/wp-config.php /var/www/wordpress/wp-config.php
 
-# RUN rm /etc/php/7.3/fpm/pool.d/www.conf
-# COPY /conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+RUN rm /etc/php/7.3/fpm/pool.d/www.conf
+COPY /conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
 CMD ./usr/sbin/php-fpm7.3 --nodaemonize
