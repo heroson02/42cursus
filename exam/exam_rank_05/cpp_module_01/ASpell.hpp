@@ -1,5 +1,8 @@
-#ifndef ASPELL_HPP
-#define ASPELL_HPP
+#pragma once
+
+#include <iostream>
+
+class ATarget;
 
 class ASpell
 {
@@ -7,21 +10,16 @@ protected:
 	std::string name;
 	std::string effects;
 public:
-	ASpell(std::string &_name, std::string &_effects);
-	~ASpell();
-	std::string getName() const;
-	std::string getEffects() const;
-	virtual ASpell *clone() = 0;
-	void	launch(const *ATarget target);
+	ASpell();
+	ASpell(const std::string &_name, const std::string &_effects);
+	ASpell(const ASpell &obj);
+	ASpell &operator=(const ASpell &obj);
+	virtual ~ASpell();
+
+	const std::string getName() const;
+	const std::string getEffects() const;
+	virtual ASpell *clone() const = 0;
+	void	launch(const ATarget &target) const;
 };
 
-ASpell(std::string &_name, std::string &_effects)
-{
-}
-
-ASpell::~ASpell()
-{
-}
-
-
-#endif
+#include "ATarget.hpp"

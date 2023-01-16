@@ -1,7 +1,12 @@
-#ifndef WARLOCK_HPP
-#define WARLOCK_HPP
+#pragma once
 
 #include <iostream>
+#include "ASpell.hpp"
+#include "ATarget.hpp"
+#include <map>
+
+class ASpell;
+class ATarget;
 
 class Warlock
 {
@@ -11,6 +16,7 @@ private:
 	Warlock();
 	Warlock(const Warlock &obj);
 	Warlock& operator=(const Warlock &obj);
+	std::map<std::string, ASpell *> brain;
 public:
 	Warlock(std::string _name, std::string _title);
 	~Warlock();
@@ -18,6 +24,8 @@ public:
 	const std::string &getTitle() const;
 	void	setTitle(const std::string a);
 	void	introduce() const;
-};
 
-#endif
+	void	learnSpell(ASpell *spell);
+	void	forgetSpell(std::string spell);
+	void	launchSpell(std::string spell, ATarget &target);
+};
